@@ -1,0 +1,50 @@
+@import '../../../Variables.scss';
+
+.network-error-banner {
+  position: absolute;
+  top: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 0%;
+  width: 100%;
+
+  background-color: $lessSaturatedThemeColor;
+  opacity: 0;
+  animation: open 200ms forwards;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &__icon {
+    fill: $dangerColor;
+    width: 4rem;
+    color: $dangerColor;
+  }
+
+  &__message {
+    margin-left: 1rem;
+    font-size: 2rem;
+    color: $accompanyingСolor;
+  }
+  &--close {
+    height: 8%;
+    opacity: 1;
+    animation: close 200ms forwards;
+  }
+
+  @keyframes open {
+    100% {
+      height: 8%;
+      opacity: 1;
+    }
+  }
+  @keyframes close {
+    100% {
+      height: 0;
+      opacity: 0;
+    }
+  }
+}

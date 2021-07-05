@@ -1,0 +1,227 @@
+@import '../../../Variables.scss';
+.auth {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  min-height: -webkit-fill-available;
+
+  &__form {
+    @media (max-width: 1495px) {
+      width: 40%;
+    }
+    @media (max-width: 1250px) {
+      width: 60%;
+    }
+    @media (max-width: 992px) {
+      width: 70%;
+    }
+    @media (max-width: 500px) {
+      width: 90%;
+    }
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+  }
+
+  &__switch {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__switch-btn {
+    position: relative;
+    width: 49%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &--active {
+      & > .auth__switch-icon {
+        fill: $accentColor;
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        display: block;
+        width: 100%;
+        height: 0.2rem;
+        background-color: $accentColor;
+        border-radius: 10%;
+      }
+    }
+  }
+  &__switch-btn:not(.auth__switch-btn--active) {
+    &:hover,
+    &:active {
+      border-radius: 0.5rem;
+      cursor: pointer;
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        display: block;
+        width: 100%;
+        height: 0.2rem;
+        background-color: $accompanyingСolor;
+        border-radius: 10%;
+      }
+    }
+  }
+
+  &__switch-icon {
+    width: 2.5rem;
+    fill: $accompanyingСolor;
+  }
+
+  &-item {
+    margin: 1rem 0;
+    height: 5rem;
+  }
+
+  &__field {
+    display: flex;
+    // align-items: center;
+    position: relative;
+
+    &--valid {
+      &:before {
+        content: attr(data-message);
+        position: absolute;
+        top: -0.6rem;
+        left: 1rem;
+        overflow: hidden;
+        display: inline-flex;
+        padding: 0.2rem;
+        height: 1rem;
+        width: 0;
+        opacity: 0;
+        font-size: 1.1;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: $succesColor;
+        background-color: $themeColor;
+        border-radius: 0.5rem;
+        animation: show-validity 1000ms forwards;
+      }
+    }
+    &--invalid {
+      &:before {
+        content: attr(data-message);
+        position: absolute;
+        top: -0.6rem;
+        left: 1rem;
+        overflow: hidden;
+        display: inline-flex;
+        padding: 0.2rem;
+        height: 1rem;
+        width: 0;
+        opacity: 0;
+        font-size: 1.1;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: $dangerColor;
+        background-color: $themeColor;
+        border-radius: 0.5rem;
+        animation: show-validity 1000ms forwards;
+      }
+    }
+    &--show {
+      height: 0;
+      animation: show-field 200ms forwards;
+    }
+    &--hide {
+      overflow: hidden;
+      height: 5rem;
+      animation: hide-field 200ms forwards;
+      opacity: 1;
+    }
+    @keyframes show-validity {
+      100% {
+        width: auto;
+        opacity: 1;
+      }
+    }
+    @keyframes show-field {
+      100% {
+        height: 5rem;
+      }
+    }
+    @keyframes hide-field {
+      100% {
+        height: 0;
+        opacity: 0;
+      }
+    }
+  }
+
+  &__field-input {
+    padding: 0.8rem;
+    height: 100%;
+    width: 100%;
+    font-size: 1.7rem;
+    letter-spacing: 0.05em;
+    color: $accentColor;
+    background-color: $lessSaturatedThemeColor;
+    border-radius: 0.5rem;
+
+    &::placeholder {
+      font-size: 1.4rem;
+      font-weight: 300;
+      text-transform: uppercase;
+    }
+    &:focus {
+      border: 0.2rem solid $accentColor;
+
+      font-weight: 400;
+    }
+  }
+
+  &__wrapper-buttons {
+    display: flex;
+    justify-content: space-between;
+    height: 5rem;
+  }
+
+  &__wrapper-btn {
+    // display: flex;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: $lessSaturatedThemeColor;
+    font-size: 1.4rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: $accompanyingСolor;
+    border-radius: 0.5rem;
+
+    &:hover,
+    &:active {
+      color: $themeColor;
+      background-color: $accentColor;
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+    &:hover > .auth__button-icon,
+    &:active > .auth__button-icon {
+      fill: $lessSaturatedThemeColor;
+    }
+  }
+
+  &__button-icon {
+    width: 2.5rem;
+    fill: $accompanyingСolor;
+    margin-right: 1rem;
+  }
+}
