@@ -1,0 +1,727 @@
+@import '../../Variables.scss';
+@mixin padding-left-list {
+  padding-left: 1.5rem;
+}
+@mixin padding-left-project {
+  padding-left: 3.5rem;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+  max-height: 100vh;
+  min-height: 500px;
+  min-height: -webkit-fill-available;
+
+  overflow-x: hidden;
+}
+
+.tasks-essence {
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  padding-bottom: 1rem;
+
+  &__essence-item {
+    display: flex;
+    align-items: center;
+
+    margin: 0.2rem 0;
+    @include padding-left-list;
+
+    &:hover {
+      background-color: $lessSaturatedThemeColor;
+      cursor: pointer;
+    }
+  }
+
+  &__the-important-item,
+  &__the-tasks-item {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+  }
+
+  &__icon {
+    width: 1.8rem;
+  }
+
+  &__icon-important {
+    fill: hsl(39, 74%, 49%);
+  }
+
+  &__icon-tasks {
+    fill: hsl(123, 59%, 30%);
+  }
+
+  &__essence-label {
+    position: relative;
+    top: 0.2rem;
+
+    display: inline-block;
+
+    padding: 1.5rem 0 1.5rem 1rem;
+  }
+
+  &__essence-item--active {
+    @mixin before_for_active {
+      position: absolute;
+      left: 0.5rem;
+
+      display: block;
+      content: '';
+
+      width: 0.2rem;
+      height: 1.8rem;
+    }
+
+    background-color: $lessSaturatedThemeColor;
+
+    .tasks-essence__icon-important {
+      fill: hsl(39, 74%, 43%);
+    }
+    .tasks-essence__icon-tasks {
+      fill: hsl(123, 59%, 25%);
+    }
+
+    .tasks-essence__icon-important + .tasks-essence__essence-label {
+      color: hsl(39, 74%, 43%);
+    }
+
+    .tasks-essence__icon-tasks + .tasks-essence__essence-label {
+      color: hsl(123, 59%, 25%);
+    }
+
+    .tasks-essence__essence-label {
+      font-weight: 700;
+    }
+
+    .tasks-essence__the-important-item {
+      &:before {
+        @include before_for_active;
+        background-color: hsl(39, 74%, 43%);
+      }
+    }
+
+    .tasks-essence__the-tasks-item {
+      &:before {
+        @include before_for_active;
+        background-color: hsl(123, 59%, 25%);
+      }
+    }
+  }
+
+  &__task-count {
+    position: absolute;
+    right: 2rem;
+
+    font-size: 1.2rem;
+    color: $accompanyingСolor;
+  }
+}
+
+.user-lists {
+  position: relative;
+
+  padding: 1rem 0;
+  &__list {
+    display: flex;
+    align-items: center;
+
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    &:hover {
+      background-color: $lessSaturatedThemeColor;
+      cursor: pointer;
+    }
+    &:active {
+      background-color: $lessSaturatedThemeColor;
+    }
+
+    &--active {
+      .user-lists__list-label {
+        color: $accentColor;
+        font-weight: 700;
+      }
+
+      &:before {
+        position: relative;
+        right: 1rem;
+
+        display: block;
+        content: '';
+
+        width: 0.2rem;
+        height: 1.8rem;
+
+        background-color: $accentColor;
+      }
+    }
+  }
+
+  &__list-icon {
+    width: 2rem;
+
+    fill: $accentColor;
+  }
+
+  &__list-label {
+    margin-left: 1rem;
+
+    font-size: 1.4rem;
+    letter-spacing: 0.01em;
+  }
+
+  &__task-count {
+    position: absolute;
+    right: 2rem;
+
+    font-size: 1.2rem;
+    color: $accompanyingСolor;
+  }
+
+  &__project {
+    margin-top: 0.5rem;
+  }
+
+  &__project-title {
+    @include padding-left-list;
+
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: $lessSaturatedThemeColor;
+    }
+    &:active {
+      background-color: $lessSaturatedThemeColor;
+    }
+  }
+
+  &__project-icon {
+    width: 2rem;
+    fill: $accompanyingСolor;
+  }
+
+  &__project-label {
+    display: inline-block;
+
+    margin-left: 1.1rem;
+
+    font-size: 1.4rem;
+  }
+
+  &__project-list {
+    @include padding-left-project;
+    position: relative;
+
+    &:before {
+      content: '';
+
+      position: absolute;
+      left: 2.4rem;
+
+      display: block;
+      height: 100%;
+      width: 0.1rem;
+
+      background-color: $accompanyingСolor;
+    }
+
+    &--active {
+      .user-lists__list-label {
+        color: $accentColor;
+        font-weight: 700;
+      }
+
+      &:after {
+        content: '';
+
+        position: absolute;
+        left: 2.3rem;
+
+        width: 0.2rem;
+        height: 2rem;
+
+        background-color: $accentColor;
+      }
+    }
+  }
+
+  &__project-arrow {
+    position: absolute;
+    right: 1rem;
+
+    width: 3rem;
+
+    fill: $accompanyingСolor;
+
+    transition: transform ease 200ms;
+
+    &--close {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.add-task-object {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  &__add-list-object {
+    width: 85%;
+  }
+
+  &__button-add-list {
+    width: 100%;
+    height: 3rem;
+
+    padding-left: 1.5rem;
+
+    font-size: 1.5rem;
+    color: $accompanyingСolor;
+    font-weight: 700;
+    text-align: left;
+
+    &:before {
+      content: '+ ';
+      display: inline;
+
+      font-size: 2rem;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $lessSaturatedThemeColor;
+    }
+  }
+
+  &__add-project-object {
+    width: 15%;
+  }
+
+  &__button-add-project {
+    width: 100%;
+    height: 3rem;
+    &:hover {
+      cursor: pointer;
+      background-color: $lessSaturatedThemeColor;
+    }
+  }
+
+  &__add-project-icon {
+    width: 2.3rem;
+    fill: $accompanyingСolor;
+  }
+}
+
+.list {
+  @media (max-width: 1250px) {
+    flex-shrink: 0;
+    width: 60%;
+    padding: 2rem;
+  }
+  @media (max-width: 992px) {
+    width: 50%;
+  }
+  @media (max-width: 500px) {
+    width: 100%;
+  }
+
+  position: relative;
+  overflow-y: auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  flex-grow: 1;
+  max-height: 100%;
+  padding: 3rem;
+
+  background-color: $bgColor;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  &__to-menu {
+    display: none;
+    // background-color: red;
+    width: 4rem;
+    height: 4rem;
+    &:active {
+      background-color: $lessSaturatedThemeColor;
+    }
+
+    @media (max-width: 500px) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+  }
+  &__to-menu-icon {
+    fill: $accompanyingСolor;
+    transform: rotate(-90deg);
+  }
+
+  &__tasks {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  &__task {
+    margin-bottom: 0.2rem;
+    background-color: $lessSaturatedThemeColor;
+  }
+
+  &__list-label {
+    padding: 0.5rem;
+
+    color: $accentColor;
+    margin-bottom: 3rem;
+    letter-spacing: 0.1rem;
+
+    &:hover {
+      background-color: $lessSaturatedThemeColor;
+    }
+  }
+
+  &__tasks {
+    flex-grow: 1;
+  }
+
+  &__new-task {
+    height: 5rem;
+  }
+}
+.task {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-shrink: 2;
+
+  padding: 1.5rem 1rem;
+  border-radius: 0.5rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    transform: skew(10deg);
+  }
+
+  &__checkbox {
+    display: none;
+  }
+
+  &__checkbox-label {
+    display: block;
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0.2rem solid $accompanyingСolor;
+    border-radius: 50%;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__checkbox:checked + &__checkbox-label {
+    border: none;
+    background-color: $accentColor;
+    &:after {
+      // content: url(./assets/icons/checkmark.svg);
+      position: relative;
+      top: 0.6rem;
+      right: 0.3rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  &__wrapper-task-essence {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__task-essence {
+    padding-left: 1.5rem;
+    flex-grow: 1;
+
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+
+    &--completed {
+      color: $accompanyingСolor;
+      text-decoration: line-through;
+    }
+  }
+
+  &__additional-info {
+    display: flex;
+    align-items: center;
+
+    margin-left: 1.2rem;
+  }
+  &__note-icon {
+    width: 1.5rem;
+    fill: $accompanyingСolor;
+  }
+  &__is-note {
+    margin-left: 0.5rem;
+    color: $accompanyingСolor;
+  }
+
+  &__important-button {
+    margin-left: auto;
+  }
+
+  &__important-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    &--true {
+      fill: $accentColor;
+    }
+    &--false {
+      fill: $accompanyingСolor;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.new-task {
+  display: flex;
+
+  margin-top: 1rem;
+  border-radius: 0.5rem;
+  background-color: $lessSaturatedThemeColor;
+
+  &__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+    width: 5rem;
+
+    &-plus {
+      fill: $accompanyingСolor;
+
+      width: 3rem;
+    }
+    &-circle {
+      fill: $accompanyingСolor;
+
+      width: 2.6rem;
+    }
+  }
+
+  &__input {
+    flex-grow: 1;
+    height: 100%;
+
+    padding: 0.5rem;
+
+    font-size: 1.5rem;
+    color: $contrastColor;
+  }
+}
+
+.task-details {
+  @media (max-width: 1495px) {
+    width: 30%;
+  }
+  @media (max-width: 1250px) {
+    position: relative;
+    right: 0;
+    width: 60%;
+    border-left: 1px solid $accompanyingСolor;
+    animation: task-datails-open-less1250 200ms forwards;
+  }
+  @media (max-width: 992px) {
+    width: 50%;
+    animation: task-datails-open-less992 200ms forwards;
+  }
+  @media (max-width: 500px) {
+    width: 100%;
+    animation: task-datails-open-less500 200ms forwards;
+  }
+
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin-right: -20%;
+  width: 20%;
+  background-color: $themeColor;
+  transition: all ease 200ms;
+
+  animation: task-datails-open 200ms forwards;
+
+  @keyframes task-datails-open {
+    100% {
+      margin-right: 0;
+    }
+  }
+  @keyframes task-datails-open-less1250 {
+    100% {
+      right: 60%;
+    }
+  }
+  @keyframes task-datails-open-less992 {
+    100% {
+      right: 50%;
+    }
+  }
+  @keyframes task-datails-open-less500 {
+    100% {
+      right: 100%;
+    }
+  }
+
+  &--close {
+    @media (max-width: 1495px) {
+      animation: task-datails-close-less1495 200ms forwards;
+    }
+    @media (max-width: 1250px) {
+      right: 60%;
+      animation: task-datails-close-less1250 200ms forwards;
+    }
+    @media (max-width: 992px) {
+      right: 50%;
+      animation: task-datails-close-less1250 200ms forwards;
+    }
+    @media (max-width: 500px) {
+      right: 100%;
+      animation: task-datails-close-less1250 200ms forwards;
+    }
+
+    margin-right: 0;
+    animation: task-datails-close 200ms forwards;
+
+    @keyframes task-datails-close-less1495 {
+      100% {
+        margin-right: -30%;
+      }
+    }
+    @keyframes task-datails-close-less1250 {
+      100% {
+        right: 0;
+      }
+    }
+
+    @keyframes task-datails-close {
+      100% {
+        margin-right: -20%;
+      }
+    }
+  }
+
+  &__task {
+    min-height: 20%;
+    background-color: $lessSaturatedThemeColor;
+    &:active {
+      transform: skew(0deg);
+    }
+  }
+
+  &__add-note {
+    margin: 1rem 1rem;
+    height: 10rem;
+  }
+
+  &__management {
+    margin-top: auto;
+    display: flex;
+    height: 5rem;
+
+    background-color: $lessSaturatedThemeColor;
+  }
+  &__disable {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 10%;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $lessSaturatedThemeColor;
+    }
+  }
+  &__disable-arrow {
+    width: 3rem;
+    fill: $accompanyingСolor;
+    transform: rotate(90deg);
+  }
+
+  &__date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 80%;
+    flex-shrink: 1;
+
+    font-size: 1.3rem;
+    color: $accompanyingСolor;
+    letter-spacing: 0.06em;
+    &:hover {
+      cursor: default;
+    }
+  }
+  &__delete-task {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    flex-basis: 10%;
+    &:hover {
+      cursor: pointer;
+      background-color: $lessSaturatedThemeColor;
+    }
+    &:hover > .task-details__delete-icon {
+      fill: $dangerColor;
+    }
+  }
+  &__delete-icon {
+    width: 2.2rem;
+    fill: $accompanyingСolor;
+  }
+}
+
+.add-note {
+  // background-color: $lessSaturatedThemeColor;
+
+  &__input {
+    padding: 1rem;
+    height: 100%;
+    width: 100%;
+
+    font-size: 1.4rem;
+    color: $contrastColor;
+    background-color: $lessSaturatedThemeColor;
+  }
+}

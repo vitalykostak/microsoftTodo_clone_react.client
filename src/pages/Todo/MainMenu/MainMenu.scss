@@ -1,0 +1,118 @@
+@import '../../../Variables.scss';
+
+.main-menu {
+  @media (max-width: 1495px) {
+    width: 30%;
+  }
+  @media (max-width: 1250px) {
+    width: 40%;
+  }
+  @media (max-width: 992px) {
+    width: 50%;
+  }
+  @media (max-width: 500px) {
+    width: 100%;
+  }
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  padding-top: 1rem;
+  overflow-y: auto;
+  transition: margin-left ease 200ms;
+
+  // min-height: inherit;
+  width: 20%;
+
+  background-color: $themeColor;
+
+  &--non-priority-display {
+    @media (max-width: 500px) {
+      margin-left: -100%;
+    }
+  }
+
+  &__app-name {
+    margin-bottom: 2rem;
+
+    padding-left: 1.5rem;
+
+    font-size: 1.8rem;
+    color: $accompanyingСolor;
+    font-weight: 300;
+  }
+
+  &__profile {
+    position: relative;
+    display: flex;
+    padding-left: 1.5rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+
+    &:not(.main-menu__profile--open):hover,
+    &:not(.main-menu__profile--open):active {
+      cursor: pointer;
+      background-color: $lessSaturatedThemeColor;
+
+      .main-menu__profile-arrows {
+        fill: $accentColor;
+      }
+    }
+    &-dropdown {
+      position: absolute;
+      top: 100%;
+      z-index: 500;
+    }
+  }
+
+  &__user-photo {
+    width: 2.5rem;
+    fill: $accompanyingСolor;
+  }
+
+  &__user-photo {
+    width: 2.5rem;
+    fill: $accompanyingСolor;
+  }
+
+  &__personal-data {
+    padding-left: 0.9rem;
+  }
+
+  &__full-name {
+    font-family: Lato;
+    font-size: 1.5rem;
+  }
+
+  &__username {
+    display: inline-block;
+    font-size: 1.2rem;
+    color: $accompanyingСolor;
+  }
+
+  &__profile-arrows {
+    // align-self: baseline;
+    margin-left: 2rem;
+    width: 0.8rem;
+    fill: $accompanyingСolor;
+  }
+
+  &__tasks-essence {
+    margin-top: 1rem;
+    border-bottom: 0.1rem solid $lessSaturatedThemeColor;
+  }
+
+  &__add-task-object {
+    &--fixed {
+      position: fixed;
+      bottom: 0;
+      z-index: 10;
+
+      width: inherit !important;
+      box-sizing: border-box;
+
+      background-color: $themeColor;
+    }
+  }
+}

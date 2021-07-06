@@ -26,7 +26,6 @@ import AuthSwitch from './AuthSwitch';
 import './Auth.scss';
 
 const AuthForm = () => {
-  const dispatch = useDispatch();
   const {
     usernameField,
     passwordField,
@@ -96,9 +95,9 @@ const AuthForm = () => {
     !!surnameField.error ||
     !!firstNameField.httpError.registration ||
     !!surnameField.httpError.registration ||
-    !!usernameField.httpError.login ||
+    !!usernameField.httpError.registration ||
     !!usernameField.error ||
-    !!passwordField.httpError.login ||
+    !!passwordField.httpError.registration ||
     !!passwordField.error ||
     isFetching;
 

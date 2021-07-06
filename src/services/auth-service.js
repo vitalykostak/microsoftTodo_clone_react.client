@@ -7,7 +7,6 @@ import {
   setUsernameHTTPError,
   setPasswordHTTPError,
 } from '../store/actionCreators/authForm';
-import { setAuth } from '../store/actionCreators/auth';
 
 class AuthService {
   async registration(dispatch, { firstName, surname, username, password }) {
@@ -39,9 +38,8 @@ class AuthService {
       } else if (statusCode === 201) {
         authHelper.setAuthDataToLS({
           token: json.accesToken,
-          userId: json.userId,
         });
-        dispatch(setAuth());
+        window.location.reload();
       }
     });
   }
@@ -66,10 +64,16 @@ class AuthService {
       } else if (statusCode === 200) {
         authHelper.setAuthDataToLS({
           token: json.accesToken,
-          userId: json.userId,
         });
-        dispatch(setAuth());
+        window.location.reload();
       }
+    });
+  }
+
+  async logout(dispatch) {
+    return await api('/auth/logout', 'DELETE').finally(() => {
+      authHelper.deleteToken();
+      window.location.reload();
     });
   }
 }

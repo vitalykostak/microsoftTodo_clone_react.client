@@ -50,15 +50,28 @@ class AuthHelper {
 
   checkAuth() {
     const token = localStorage.getItem('token');
-    const userId = localStorage.getItem('userId');
 
-    return !!token && !!userId ? true : false;
+    return !!token ? true : false;
   }
 
   setAuthDataToLS(AuthData) {
     for (let key in AuthData) {
       localStorage.setItem(key, AuthData[key]);
     }
+  }
+
+  getToken() {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      return null;
+    }
+
+    return token;
+  }
+
+  deleteToken() {
+    localStorage.removeItem('token');
   }
 }
 
