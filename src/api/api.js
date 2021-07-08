@@ -3,7 +3,6 @@ import ServerError from '../exceptions/server-exception';
 import ApiHelper from '../helpers/api-helper';
 
 async function api(url, method, body = null, headers = {}) {
-  console.log(body);
   try {
     const fetchOption = {
       method,

@@ -1,18 +1,44 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
+import { fetchAllTasks } from '../../store/actionCreators/tasks';
+import { fetchAllLists } from '../../store/actionCreators/lists';
 import { fetchUserInfo } from '../../store/actionCreators/user';
 import useRequest from '../../hooks/useRequest';
 
+import AppPreloader from '../Shared/AppPreloader';
 import MainMenu from './MainMenu';
 
 import './app.scss';
 
-function Todo() {
+const Todo = React.memo(() => {
+  const { user, tasks, lists } = useSelector(state => ({
+    user: state.user,
+    tasks: state.tasks,
+    lists: state.lists,
+  }));
+
   const getUserInfo = useRequest(fetchUserInfo());
+  const getAllTasks = useRequest(fetchAllTasks());
+  const getAllLists = useRequest(fetchAllLists());
 
   React.useEffect(() => {
     getUserInfo();
-  });
+    getAllTasks();
+    getAllLists();
+  }, []);
+
+  const isReadyInitialData = !!(
+    user.firstName &&
+    user.surname &&
+    user.username &&
+    tasks.allTasks &&
+    lists.allLists
+  );
+
+  if (!isReadyInitialData) {
+    return <AppPreloader />;
+  }
 
   return (
     <main className='app'>
@@ -168,6 +194,6 @@ function Todo() {
       </div> */}
     </main>
   );
-}
+});
 
 export default Todo;

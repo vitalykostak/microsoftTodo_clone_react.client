@@ -6,8 +6,8 @@ export const setUserInfo = payload => ({
   payload,
 });
 
-// ===========================
+// =============================================
 
 export const fetchUserInfo = () => dispatch => {
-  return userService.getUserInfo();
+  return userService.getUserInfo(dispatch);
 };

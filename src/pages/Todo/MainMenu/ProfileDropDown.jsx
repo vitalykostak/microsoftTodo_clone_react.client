@@ -6,8 +6,8 @@ import {
   unsetActiveDropDown,
   setHiddingDropDown,
   unsetHiddingDropDown,
-} from '../../../store/actionCreators/main-menu';
-import { fetchLogout } from '../../../store/actionCreators/main-menu';
+} from '../../../store/actionCreators/mainMenu';
+import { fetchLogout } from '../../../store/actionCreators/mainMenu';
 import useRequest from '../../../hooks/useRequest';
 
 import DoorSVG from '../../Shared/SVG/DoorSVG';

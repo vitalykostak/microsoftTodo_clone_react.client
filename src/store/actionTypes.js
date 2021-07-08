@@ -35,3 +35,9 @@ export const UNSET_HIDDING_DROPDOWN = 'UNSET_HIDDING_DROPDOWN';
 
 // user-reducer
 export const SET_USER_INFO = 'SET_USER_INFO';
+
+// tasks-reducer
+export const SET_TASKS = 'SET_TASKS';
+
+// lists-reducer
+export const SET_LISTS = 'SET_LISTS';

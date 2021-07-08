@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import classNames from 'classnames';
 import React from 'react';
 
-import { setActiveDropDown } from '../../../store/actionCreators/main-menu';
+import { setActiveDropDown } from '../../../store/actionCreators/mainMenu';
 
 import ArrowsVerticalSVG from '../../Shared/SVG/ArrowsVerticalSVG';
 import ProfileDropDown from './ProfileDropDown';
@@ -10,7 +10,10 @@ import UserSVG from '../../Shared/SVG/UserSVG';
 
 function Profile() {
   const dispatch = useDispatch();
-  const { profileDropDown } = useSelector(state => state.mainMenu);
+  const { mainMenu, user } = useSelector(state => ({
+    mainMenu: state.mainMenu,
+    user: state.user,
+  }));
 
   const openDropDown = () => {
     dispatch(setActiveDropDown());
@@ -20,16 +23,16 @@ function Profile() {
     <div
       onClick={openDropDown}
       className={classNames('main-menu__profile', {
-        'main-menu__profile--open': profileDropDown.isActive,
+        'main-menu__profile--open': mainMenu.profileDropDown.isActive,
       })}
     >
       <UserSVG classList='main-menu__user-photo' />
       <div className='main-menu__personal-data container-menu'>
-        <p className='main-menu__full-name'>Віталій Костак</p>
-        <p className='main-menu__username'>kostak</p>
+        <p className='main-menu__full-name'>{`${user.firstName} ${user.surname}`}</p>
+        <p className='main-menu__username'>{`${user.username}`}</p>
       </div>
       <ArrowsVerticalSVG classList='main-menu__profile-arrows' />
-      {profileDropDown.isActive && <ProfileDropDown />}
+      {mainMenu.profileDropDown.isActive && <ProfileDropDown />}
     </div>
   );
 }

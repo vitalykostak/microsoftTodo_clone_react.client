@@ -83,7 +83,7 @@ export const unsetVisibleRegisterFields = () => ({
   type: UNSET_VISIBLE_REGISTER_FIELDS,
 });
 
-// ===================================================================
+// ========================================================================
 export const setAuthActionWithVisibleFields = activeAction => dispatch => {
   dispatch(setVisibleRegisterFields());
   dispatch(setAuthActiveAction(activeAction));

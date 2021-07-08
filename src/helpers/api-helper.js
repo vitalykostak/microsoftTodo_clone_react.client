@@ -2,7 +2,6 @@ import ServerError from '../exceptions/server-exception';
 
 class ApiHelper {
   hasBody(response) {
-    console.log(response.headers.get('Content-Length'));
     if (!response.headers.get('Content-Length')) {
       return false;
     }

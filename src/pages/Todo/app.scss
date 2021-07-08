@@ -68,7 +68,7 @@
   &__essence-item--active {
     @mixin before_for_active {
       position: absolute;
-      left: 0.5rem;
+      left: -1rem;
 
       display: block;
       content: '';
@@ -142,6 +142,7 @@
     }
 
     &--active {
+      background-color: $lessSaturatedThemeColor;
       .user-lists__list-label {
         color: $accentColor;
         font-weight: 700;
