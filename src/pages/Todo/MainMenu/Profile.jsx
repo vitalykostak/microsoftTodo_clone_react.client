@@ -8,7 +8,7 @@ import ArrowsVerticalSVG from '../../Shared/SVG/ArrowsVerticalSVG';
 import ProfileDropDown from './ProfileDropDown';
 import UserSVG from '../../Shared/SVG/UserSVG';
 
-function Profile() {
+const Profile = React.memo(() => {
   const dispatch = useDispatch();
   const { mainMenu, user } = useSelector(state => ({
     mainMenu: state.mainMenu,
@@ -26,15 +26,15 @@ function Profile() {
         'main-menu__profile--open': mainMenu.profileDropDown.isActive,
       })}
     >
-      <UserSVG classList='main-menu__user-photo' />
+      <UserSVG className='main-menu__user-photo' />
       <div className='main-menu__personal-data container-menu'>
         <p className='main-menu__full-name'>{`${user.firstName} ${user.surname}`}</p>
         <p className='main-menu__username'>{`${user.username}`}</p>
       </div>
-      <ArrowsVerticalSVG classList='main-menu__profile-arrows' />
+      <ArrowsVerticalSVG className='main-menu__profile-arrows' />
       {mainMenu.profileDropDown.isActive && <ProfileDropDown />}
     </div>
   );
-}
+});
 
 export default Profile;

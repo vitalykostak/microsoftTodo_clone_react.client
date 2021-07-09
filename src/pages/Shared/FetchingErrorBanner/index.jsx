@@ -34,7 +34,7 @@ function NetworkErrorBanner({ type, children }) {
 
   return (
     <div className='network-error-banner' onClick={closeBanner} ref={bannerRef}>
-      <CloudError classList='network-error-banner__icon' />
+      <CloudError className='network-error-banner__icon' />
       <p className='network-error-banner__message'>{children}</p>
     </div>
   );

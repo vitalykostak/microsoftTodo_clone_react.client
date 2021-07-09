@@ -1,8 +1,12 @@
-import { SET_LISTS } from '../actionTypes';
+import { SET_LISTS, SET_ACTIVE_LIST } from '../actionTypes';
 
 const initialState = {
-  allLists: null,
-  activeList: '__DEFAULT_LIST_TASKS__',
+  defaultLists: [
+    { id: '__DEFAULT_LIST_IMPORTANT__', label: 'Важно' },
+    { id: '__DEFAULT_LIST_TASKS__', label: 'Задачи' },
+  ],
+  customLists: null,
+  activeListId: '__DEFAULT_LIST_TASKS__',
 };
 
 const listsReducer = (state = initialState, action) => {
@@ -10,7 +14,13 @@ const listsReducer = (state = initialState, action) => {
     case SET_LISTS: {
       return {
         ...state,
-        allLists: [...action.payload],
+        customLists: [...action.payload],
+      };
+    }
+    case SET_ACTIVE_LIST: {
+      return {
+        ...state,
+        activeListId: `${action.payload}`,
       };
     }
 

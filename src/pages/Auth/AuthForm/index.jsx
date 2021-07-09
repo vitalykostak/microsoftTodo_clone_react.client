@@ -77,10 +77,10 @@ const AuthForm = () => {
     fetchLogin(usernameField.value, passwordField.value)
   );
 
-  const loginRenderIcon = () => <DoorSVG classList='auth__button-icon' />;
+  const loginRenderIcon = () => <DoorSVG className='auth__button-icon' />;
 
   const registerRenderIcon = () => (
-    <UserPlusSVG classList='auth__button-icon' />
+    <UserPlusSVG className='auth__button-icon' />
   );
 
   const isDisabledLogin =

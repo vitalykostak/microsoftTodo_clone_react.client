@@ -34,15 +34,15 @@ function AuthSwitch() {
         } `}
         onClick={switchToLogin}
       >
-        <DoorSVG classList='auth__switch-icon' />
+        <DoorSVG className='auth__switch-icon' />
       </Button>
       <Button
-        classList={`auth__switch-btn ${
+        className={`auth__switch-btn ${
           activeAction === 'registration' && 'auth__switch-btn--active'
         } `}
         onClick={switchToRegistration}
       >
-        <UserPlusSVG classList='auth__switch-icon' />
+        <UserPlusSVG className='auth__switch-icon' />
       </Button>
     </div>
   );

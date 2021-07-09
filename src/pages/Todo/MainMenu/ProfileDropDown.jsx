@@ -50,7 +50,7 @@ function ProfileDropDown() {
       })}
     >
       <div className='profile-dropdown__item' onClick={logout}>
-        <DoorSVG classList='profile-dropdown__item-icon' />
+        <DoorSVG className='profile-dropdown__item-icon' />
         <p className='profile-dropdown__item-label'>Выйти</p>
       </div>
     </div>

@@ -1,7 +1,12 @@
-import { SET_TASKS } from '../actionTypes';
+import {
+  SET_TASKS,
+  SET_CREATING_TASK,
+  UNSET_CREATING_TASK,
+} from '../actionTypes';
 
 const initialState = {
   allTasks: null,
+  creatingTask: false,
 };
 
 const tasksReducer = (state = initialState, action) => {
@@ -10,6 +15,20 @@ const tasksReducer = (state = initialState, action) => {
       return {
         ...state,
         allTasks: [...action.payload],
+      };
+    }
+
+    case SET_CREATING_TASK: {
+      return {
+        ...state,
+        creatingTask: true,
+      };
+    }
+
+    case UNSET_CREATING_TASK: {
+      return {
+        ...state,
+        creatingTask: false,
       };
     }
 

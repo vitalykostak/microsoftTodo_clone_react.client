@@ -1,8 +1,8 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Profile from './Profile';
-import DefaultListImportant from './DefaultListImportant';
-import DefaultListTasks from './DefaultListTasks';
+import DefaultList from './DefaultList';
 
 import ListSVG from '../../Shared/SVG/ListSVG';
 // import ProjectSVG from '../../Shared/SVG/ProjectSVG';
@@ -12,14 +12,20 @@ import ListSVG from '../../Shared/SVG/ListSVG';
 import './MainMenu.scss';
 
 const MainMenu = React.memo(() => {
+  const defaultLists = useSelector(state => state.lists.defaultLists);
+  const defaultListElems = defaultLists.map(el => (
+    <DefaultList key={el.id} id={el.id}>
+      {el.label}
+    </DefaultList>
+  ));
+
   return (
     <nav className='main-menu main-menu--non-priority-display'>
       <h3 className='main-menu__app-name container-menu'>To Do</h3>
       <Profile />
 
       <div className='tasks-essence main-menu__tasks-essence'>
-        <DefaultListImportant />
-        <DefaultListTasks />
+        {defaultListElems}
       </div>
       <div className='user-lists'>
         {/* <div className='user-lists__list user-lists__list--active'>

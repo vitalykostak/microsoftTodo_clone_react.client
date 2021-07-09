@@ -5,7 +5,6 @@ class ListService {
   async getLists(dispatch) {
     return await api('/list', 'GET').then(response => {
       const { statusCode, json } = response;
-      console.log(statusCode);
       if (statusCode === 404) {
         return dispatch(setLists([]));
       } else if (statusCode === 200) {
