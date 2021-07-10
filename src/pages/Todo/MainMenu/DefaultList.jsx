@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { setActiveList } from '../../../store/actionCreators/lists';
 import listHelper from '../../../helpers/list-helper';
-import StarSVG from '../../Shared/SVG/StarSVG';
+import FilledStarSVG from '../../Shared/SVG/FilledStarSVG';
 import TasksListSVG from '../../Shared/SVG/TasksListSVG';
 
 const DefaultList = React.memo(({ id, children }) => {
@@ -24,7 +24,7 @@ const DefaultList = React.memo(({ id, children }) => {
       }
       case '__DEFAULT_LIST_IMPORTANT__': {
         return (
-          <StarSVG className='tasks-essence__icon tasks-essence__icon-important' />
+          <FilledStarSVG className='tasks-essence__icon tasks-essence__icon-important' />
         );
       }
     }

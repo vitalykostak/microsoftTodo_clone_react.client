@@ -4,6 +4,7 @@ import useCreationTask from '../../../hooks/useCreationTask';
 
 import CircleSVG from '../../Shared/SVG/CircleSVG';
 import PlusSVG from '../../Shared/SVG/PlusSVG';
+import Button from '../../Shared/Button';
 
 const CreationTask = React.memo(() => {
   const {
@@ -25,13 +26,13 @@ const CreationTask = React.memo(() => {
 
   const icon = React.useMemo(() => {
     return newTaskObj || isCreatingTask ? (
-      <div className='new-task__icon' onClick={addNewTask}>
+      <Button className='new-task__icon' onClick={addNewTask}>
         <CircleSVG className='new-task__icon-circle' />
-      </div>
+      </Button>
     ) : (
-      <div className='new-task__icon' onClick={enableCreationTask}>
+      <Button className='new-task__icon' onClick={enableCreationTask}>
         <PlusSVG className='new-task__icon-plus' />
-      </div>
+      </Button>
     );
   }, [newTaskObj, isCreatingTask]);
 

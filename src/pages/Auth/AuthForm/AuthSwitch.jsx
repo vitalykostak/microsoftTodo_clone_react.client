@@ -29,7 +29,7 @@ function AuthSwitch() {
   return (
     <div className='auth__switch auth-item'>
       <Button
-        classList={`auth__switch-btn ${
+        className={`auth__switch-btn ${
           activeAction === 'login' && 'auth__switch-btn--active'
         } `}
         onClick={switchToLogin}

@@ -21,7 +21,6 @@ async function api(url, method, body = null, headers = {}) {
     ApiHelper.checkServerError(normalisedResponse);
     return normalisedResponse;
   } catch (e) {
-    console.log(e);
     if (e instanceof ServerError) {
       throw e;
     }

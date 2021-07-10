@@ -2,48 +2,26 @@ import React from 'react';
 import useTaskList from '../../../hooks/useTaskList';
 
 import CreationTask from './CreationTask';
+import Task from '../../Shared/Task';
+
+import ArrowSVG from '../../Shared/SVG/ArrowSVG';
 
 const TaskList = React.memo(() => {
-  const { activeListId, listTasks, uncompletedTasks, listLabel } =
-    useTaskList();
+  const { listTasks, listLabel } = useTaskList();
 
   return (
     <article className='list'>
       <header className='list__header'>
         <div className='list__to-menu'>
-          <svg
-            className='list__to-menu-icon'
-            version='1.1'
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-          >
-            <path d='M7.406 15.422l-1.406-1.406 6-6 6 6-1.406 1.406-4.594-4.594z'></path>
-          </svg>
+          <ArrowSVG className='list__to-menu-icon' />
         </div>
         <h1 className='list__list-label'>{listLabel}</h1>
       </header>
       <div className='list__tasks'>
-        {/* <div className='task list__task'>
-          <input className='task__checkbox' type='checkbox' id='im' />
-          <label className='task__checkbox-label' htmlFor='im'></label>
-
-          <p className='task__task-essence task__task-essence--completed'>
-            Задача без названия
-          </p>
-          <button className='task__important-button'>
-            <svg
-              className='task__important-icon task__important-icon--true'
-              version='1.1'
-              xmlns='http://www.w3.org/2000/svg'
-              viewBox='0 0 32 32'
-            >
-              <title>star</title>
-              <path d='M16 23l-9 6 4-10-9-6h10l4-10 4 10h10l-9 6 4 10z'></path>
-            </svg>
-          </button>
-        </div>
+        {listTasks.map(task => (
+          <Task displayAdditional={true} task={task} />
+        ))}
+        {/* 
 
         <div className='task task--with-note list__task'>
           <input className='task__checkbox' type='checkbox' id='im1' />
