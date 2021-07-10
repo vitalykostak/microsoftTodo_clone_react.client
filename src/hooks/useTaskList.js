@@ -24,7 +24,7 @@ const useTaskList = () => {
     customLists
   );
 
-  return { listTasks, uncompletedTasks, listLabel };
+  return { activeListId, listTasks, uncompletedTasks, listLabel };
 };
 
 export default useTaskList;

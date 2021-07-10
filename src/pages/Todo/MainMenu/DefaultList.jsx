@@ -32,7 +32,7 @@ const DefaultList = React.memo(({ id, children }) => {
 
   const uncompletedTasks = React.useMemo(() => {
     return listHelper.calculateUncompletedTasks(allTasks, id);
-  }, [allTasks]);
+  }, [allTasks, id]);
 
   const onClick = React.useCallback(() => {
     if (activeListId === id) return false;

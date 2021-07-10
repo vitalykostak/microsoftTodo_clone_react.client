@@ -38,6 +38,10 @@ class ListHelper {
     return /^__DEFAULT_LIST_/.test(activeListId);
   }
 
+  isDefaultImportantList(activeListId) {
+    return activeListId === '__DEFAULT_LIST_IMPORTANT__';
+  }
+
   getListLabel(activeListId, defaultLists, customLists) {
     const isDefaultList = this.isDefaultList(activeListId);
     const targetObj = isDefaultList ? defaultLists : customLists;

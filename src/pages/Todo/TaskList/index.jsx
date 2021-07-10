@@ -1,10 +1,11 @@
 import React from 'react';
 import useTaskList from '../../../hooks/useTaskList';
 
-import NewTask from './NewTask';
+import CreationTask from './CreationTask';
 
 const TaskList = React.memo(() => {
-  const { listTasks, uncompletedTasks, listLabel } = useTaskList();
+  const { activeListId, listTasks, uncompletedTasks, listLabel } =
+    useTaskList();
 
   return (
     <article className='list'>
@@ -76,7 +77,7 @@ const TaskList = React.memo(() => {
           </button>
         </div> */}
       </div>
-      <NewTask />
+      <CreationTask />
     </article>
   );
 });

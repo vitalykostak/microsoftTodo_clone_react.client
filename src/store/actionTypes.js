@@ -38,8 +38,10 @@ export const SET_USER_INFO = 'SET_USER_INFO';
 
 // tasks-reducer
 export const SET_TASKS = 'SET_TASKS';
+export const SET_ONE_TASK = 'SET_ONE_TASK';
 export const SET_CREATING_TASK = 'SET_CREATING_TASK';
 export const UNSET_CREATING_TASK = 'UNSET_CREATING_TASK';
+export const SET_NEW_TASK_VALUE = 'SET_NEW_TASK_VALUE';
 
 // lists-reducer
 export const SET_LISTS = 'SET_LISTS';
