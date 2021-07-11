@@ -1,9 +1,11 @@
+import listHelper from '../../helpers/list-helper';
 import {
   SET_TASKS,
   SET_ONE_TASK,
   SET_CREATING_TASK,
   UNSET_CREATING_TASK,
   SET_NEW_TASK_VALUE,
+  REPLACE_ONE_TASK,
 } from '../actionTypes';
 
 const initialState = {
@@ -24,6 +26,16 @@ const tasksReducer = (state = initialState, action) => {
       return {
         ...state,
         allTasks: [...state.allTasks, action.payload],
+      };
+    }
+
+    case REPLACE_ONE_TASK: {
+      console.log('here');
+      return {
+        ...state,
+        allTasks: [
+          ...listHelper.findAndReplace(state.allTasks, action.payload),
+        ],
       };
     }
 

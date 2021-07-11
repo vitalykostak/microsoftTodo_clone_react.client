@@ -2,6 +2,7 @@ import api from '../api';
 import {
   setTasks,
   setOneTask,
+  replaceOneTask,
   unsetCreatingTask,
   setNewTaskValue,
 } from '../store/actionCreators/tasks';
@@ -27,6 +28,20 @@ class TaskService {
         dispatch(setNewTaskValue(''));
       }
     });
+  }
+
+  async updateTask(dispatch, { taskId, updateData }) {
+    return await api('/task', 'PATCH', { taskId, updateData }).then(
+      response => {
+        const { statusCode, json } = response;
+        console.log(statusCode);
+
+        if (statusCode === 200) {
+          console.log(json);
+          dispatch(replaceOneTask(json));
+        }
+      }
+    );
   }
 }
 

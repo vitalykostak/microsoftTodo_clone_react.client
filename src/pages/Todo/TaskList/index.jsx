@@ -19,7 +19,7 @@ const TaskList = React.memo(() => {
       </header>
       <div className='list__tasks'>
         {listTasks.map(task => (
-          <Task displayAdditional={true} task={task} />
+          <Task key={task._id} displayAdditional={true} task={task} />
         ))}
         {/* 
 

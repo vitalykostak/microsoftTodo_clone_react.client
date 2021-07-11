@@ -10,7 +10,7 @@ import AppPreloader from '../Shared/AppPreloader';
 import MainMenu from './MainMenu';
 import TaskList from './TaskList';
 
-import './app.scss';
+import './App.scss';
 
 const Todo = React.memo(() => {
   const { user, tasks, lists } = useSelector(state => ({
@@ -45,7 +45,7 @@ const Todo = React.memo(() => {
     <main className='app'>
       <MainMenu />
       <TaskList />
-      {/* <div className='task-details task-details--close'>
+      <div className='task-details task-details--close'>
         <header className='task task-details__task'>
           <input className='task__checkbox' type='checkbox' id='im4' />
           <label className='task__checkbox-label' htmlFor='im4'></label>
@@ -95,7 +95,7 @@ const Todo = React.memo(() => {
             </svg>
           </div>
         </footer>
-      </div> */}
+      </div>
     </main>
   );
 });

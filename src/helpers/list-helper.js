@@ -34,6 +34,13 @@ class ListHelper {
     }
   }
 
+  findAndReplace(list, newTask) {
+    console.log('ll');
+    return list.map(currentTask =>
+      currentTask._id === newTask._id ? newTask : currentTask
+    );
+  }
+
   isDefaultList(activeListId) {
     return /^__DEFAULT_LIST_/.test(activeListId);
   }
@@ -49,9 +56,8 @@ class ListHelper {
     return activeList.label;
   }
 
-  calculateUncompletedTasks(list, listId) {
-    const tasks = this.getTasksByListId(list, listId);
-    const completedTasks = this.sortCompletedTask(list);
+  calculateUncompletedTasks(tasks, listId) {
+    const completedTasks = this.sortCompletedTask(tasks);
     const uncompletedTasks = tasks.length - completedTasks.length;
     return uncompletedTasks;
   }

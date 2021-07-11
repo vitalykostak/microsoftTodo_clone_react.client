@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import listHelper from '../helpers/list-helper';
 
@@ -13,10 +14,9 @@ const useTaskList = () => {
 
   const listTasks = listHelper.getTasksByListId(allTasks, activeListId);
 
-  const uncompletedTasks = listHelper.calculateUncompletedTasks(
-    allTasks,
-    activeListId
-  );
+  const uncompletedTasks = useMemo(() => {
+    return listHelper.calculateUncompletedTasks(listTasks);
+  }, [allTasks]);
 
   const listLabel = listHelper.getListLabel(
     activeListId,

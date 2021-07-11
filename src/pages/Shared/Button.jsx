@@ -9,16 +9,9 @@ const Button = ({ onClick, children, disabled, ...attrs }) => {
   );
 };
 Button.propTypes = {
-  classList: PropTypes.string,
   onClick: PropTypes.func,
   children: PropTypes.node,
   disabled: PropTypes.bool,
-};
-Button.defaultProps = {
-  classList: '',
-  onClick: () => {},
-  children: 'Default Button',
-  disabled: false,
 };
 
 export default Button;

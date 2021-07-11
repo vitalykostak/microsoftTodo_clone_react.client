@@ -15,6 +15,12 @@ const DefaultList = React.memo(({ id, children }) => {
     activeListId: state.lists.activeListId,
   }));
 
+  const uncompletedTasks = React.useMemo(() => {
+    const tasks = listHelper.getTasksByListId(allTasks, id);
+    const completedTasks = listHelper.sortCompletedTask(tasks);
+    return tasks.length - completedTasks.length;
+  }, [allTasks]);
+
   const icon = React.useMemo(() => {
     switch (id) {
       case '__DEFAULT_LIST_TASKS__': {
@@ -29,10 +35,6 @@ const DefaultList = React.memo(({ id, children }) => {
       }
     }
   }, [id]);
-
-  const uncompletedTasks = React.useMemo(() => {
-    return listHelper.calculateUncompletedTasks(allTasks, id);
-  }, [allTasks, id]);
 
   const onClick = React.useCallback(() => {
     if (activeListId === id) return false;

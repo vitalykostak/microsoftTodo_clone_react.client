@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import useTask from '../../../hooks/useTask';
+
 import Button from '../Button';
 import FilledStarSVG from '../SVG/FilledStarSVG';
 import NotFilledStarSVG from '../SVG/NotFilledStarSVG';
@@ -9,12 +11,14 @@ import NoteSVG from '../SVG/NoteSVG';
 import './Task.scss';
 
 const Task = React.memo(({ displayAdditional, task }) => {
+  const { toggleComplete, toggleImportant } = useTask(task);
+
   return (
-    // <div className='task list__task'>
     <div className='task list__task'>
       <input
         className='task__checkbox'
         type='checkbox'
+        onChange={toggleComplete}
         id={task._id}
         checked={task.isDone}
       />
@@ -35,7 +39,7 @@ const Task = React.memo(({ displayAdditional, task }) => {
         )}
       </div>
 
-      <Button className='task__important-button'>
+      <Button className='task__important-button' onClick={toggleImportant}>
         {task.isImportant ? (
           <FilledStarSVG className='task__important-icon task__important-icon--true' />
         ) : (
