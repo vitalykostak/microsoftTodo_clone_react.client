@@ -35,10 +35,13 @@ class ListHelper {
   }
 
   findAndReplace(list, newTask) {
-    console.log('ll');
     return list.map(currentTask =>
       currentTask._id === newTask._id ? newTask : currentTask
     );
+  }
+
+  findTask(list, taskId) {
+    return list.find(currentTask => currentTask._id === taskId);
   }
 
   isDefaultList(activeListId) {

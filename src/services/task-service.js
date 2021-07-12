@@ -34,10 +34,8 @@ class TaskService {
     return await api('/task', 'PATCH', { taskId, updateData }).then(
       response => {
         const { statusCode, json } = response;
-        console.log(statusCode);
 
         if (statusCode === 200) {
-          console.log(json);
           dispatch(replaceOneTask(json));
         }
       }

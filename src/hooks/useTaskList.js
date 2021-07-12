@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import listHelper from '../helpers/list-helper';
 
-const useTaskList = () => {
+const useTaskList = listIs => {
   const { activeListId, allTasks, customLists, defaultLists } = useSelector(
     state => ({
       activeListId: state.lists.activeListId,

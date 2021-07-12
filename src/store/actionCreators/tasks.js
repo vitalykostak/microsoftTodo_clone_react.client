@@ -5,6 +5,10 @@ import {
   UNSET_CREATING_TASK,
   SET_NEW_TASK_VALUE,
   REPLACE_ONE_TASK,
+  SET_VISIBLE_TASK_DETAILS,
+  UNSET_VISIBLE_TASK_DETAILS,
+  SET_ACTIVE_TASK,
+  UNSET_ACTIVE_TASK,
 } from '../actionTypes';
 import taskService from '../../services/task-service';
 
@@ -34,6 +38,23 @@ export const unsetCreatingTask = () => ({
 export const setNewTaskValue = payload => ({
   type: SET_NEW_TASK_VALUE,
   payload,
+});
+
+export const setVisibeTaskDetails = () => ({
+  type: SET_VISIBLE_TASK_DETAILS,
+});
+
+export const unsetVisibeTaskDetails = () => ({
+  type: UNSET_VISIBLE_TASK_DETAILS,
+});
+
+export const setActiveTask = payload => ({
+  type: SET_ACTIVE_TASK,
+  payload,
+});
+
+export const unsetActiveTask = () => ({
+  type: UNSET_ACTIVE_TASK,
 });
 
 // =============================================

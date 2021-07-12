@@ -10,19 +10,41 @@ import NoteSVG from '../SVG/NoteSVG';
 
 import './Task.scss';
 
-const Task = React.memo(({ displayAdditional, task }) => {
-  const { toggleComplete, toggleImportant } = useTask(task);
+const Task = React.memo(({ displayAdditional, task, type }) => {
+  const { toggleComplete, toggleImportant, showTaskDetails } = useTask(task);
+
+  const button = React.useMemo(
+    () => (
+      <Button className='task__important-button' onClick={toggleImportant}>
+        {task.isImportant ? (
+          <FilledStarSVG className='task__important-icon task__important-icon--true' />
+        ) : (
+          <NotFilledStarSVG className='task__important-icon task__important-icon--false' />
+        )}
+      </Button>
+    ),
+    [task.isImportant]
+  );
 
   return (
-    <div className='task list__task'>
-      <input
-        className='task__checkbox'
-        type='checkbox'
-        onChange={toggleComplete}
-        id={task._id}
-        checked={task.isDone}
-      />
-      <label className='task__checkbox-label' htmlFor={task._id}></label>
+    // <div className='task list__task' onClick={showTaskDetails}>
+    <div
+      className={classNames('task', {
+        list__task: type === 'listItem',
+        'task-details__task': type === 'taskDetails',
+      })}
+      onClick={showTaskDetails}
+    >
+      <div onClick={toggleComplete}>
+        <input
+          className='task__checkbox'
+          type='checkbox'
+          id={task._id}
+          checked={task.isDone}
+          readOnly
+        />
+        <label className='task__checkbox-label' htmlFor={task._id}></label>
+      </div>
       <div className='task__wrapper-task-essence'>
         <p
           className={classNames('task__task-essence', {
@@ -38,14 +60,7 @@ const Task = React.memo(({ displayAdditional, task }) => {
           </div>
         )}
       </div>
-
-      <Button className='task__important-button' onClick={toggleImportant}>
-        {task.isImportant ? (
-          <FilledStarSVG className='task__important-icon task__important-icon--true' />
-        ) : (
-          <NotFilledStarSVG className='task__important-icon task__important-icon--false' />
-        )}
-      </Button>
+      {button}
     </div>
   );
 });
