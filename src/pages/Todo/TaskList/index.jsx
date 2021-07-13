@@ -21,7 +21,7 @@ const TaskList = React.memo(() => {
         {listTasks.map(task => (
           <Task
             key={task._id}
-            displayAdditional={true}
+            isDisplayAdditional={true}
             task={task}
             type='listItem'
           />

@@ -5,14 +5,18 @@ import {
   unsetVisibeTaskDetails,
   unsetActiveTask,
   fetchUpdateTask,
+  fetchDeleteTask,
 } from '../store/actionCreators/tasks';
 
 import listHelper from '../helpers/list-helper';
+import taskHelper from '../helpers/task-helper';
 import useRequest from './useRequest';
 
 const useTaskDetails = () => {
   const dispatch = useDispatch();
   const [isHiddingTaskDetails, setIsHiddingTaskDetails] = useState(false);
+  const [isRenameingTask, setIsRenameingTask] = useState(false);
+  const [newNoteValue, setNewNoteValue] = useState('');
 
   const { activeTaskId, allTasks } = useSelector(state => ({
     activeTaskId: state.tasks.activeTask,
@@ -24,14 +28,9 @@ const useTaskDetails = () => {
     [allTasks, activeTaskId]
   );
 
-  const [newNoteValue, setNewNoteValue] = useState('');
   useEffect(() => {
     setNewNoteValue(activeTask.note);
   }, [activeTask]);
-
-  const changeNoteValue = event => {
-    setNewNoteValue(event.target.value);
-  };
 
   const confirmNoteValueReq = useRequest(
     fetchUpdateTask({
@@ -39,6 +38,11 @@ const useTaskDetails = () => {
       updateData: { note: newNoteValue },
     })
   );
+  const deleteTaskReq = useRequest(fetchDeleteTask(activeTask._id));
+
+  const editNoteValue = event => {
+    setNewNoteValue(event.target.value);
+  };
 
   const confirmNoteValue = () => {
     if (activeTask.note === newNoteValue) {
@@ -56,13 +60,25 @@ const useTaskDetails = () => {
     }, 200);
   }, [dispatch]);
 
+  const deleteTask = () => {
+    dispatch(unsetActiveTask());
+    dispatch(unsetVisibeTaskDetails());
+    deleteTaskReq();
+  };
+
+  const date = useMemo(() => {
+    return taskHelper.getHumanReadableDate(activeTask);
+  }, [activeTask]);
+
   return {
     activeTask,
     newNoteValue,
-    changeNoteValue,
+    editNoteValue,
     confirmNoteValue,
     hideTaskDetails,
     isHiddingTaskDetails,
+    deleteTask,
+    date,
   };
 };
 

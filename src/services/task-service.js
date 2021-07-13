@@ -2,6 +2,7 @@ import api from '../api';
 import {
   setTasks,
   setOneTask,
+  deleteOneTask,
   replaceOneTask,
   unsetCreatingTask,
   setNewTaskValue,
@@ -40,6 +41,16 @@ class TaskService {
         }
       }
     );
+  }
+
+  async deleteTask(dispatch, taskId) {
+    return await api('/task', 'DELETE', { taskId }).then(response => {
+      const { statusCode } = response;
+
+      if (statusCode === 204) {
+        dispatch(deleteOneTask(taskId));
+      }
+    });
   }
 }
 

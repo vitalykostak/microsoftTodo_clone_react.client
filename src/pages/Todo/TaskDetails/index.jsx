@@ -13,8 +13,10 @@ const TaskDetails = React.memo(() => {
     hideTaskDetails,
     isHiddingTaskDetails,
     newNoteValue,
-    changeNoteValue,
+    editNoteValue,
     confirmNoteValue,
+    deleteTask,
+    date,
   } = useTaskDetails();
 
   return (
@@ -23,13 +25,13 @@ const TaskDetails = React.memo(() => {
         'task-details--close': isHiddingTaskDetails,
       })}
     >
-      <Task displayAdditional={false} task={activeTask} type='taskDetails' />
+      <Task isDisplayAdditional={false} task={activeTask} type='taskDetails' />
       <div className='add-note task-details__add-note'>
         <textarea
           className='add-note__input'
           placeholder='Добавить заметку'
           value={newNoteValue}
-          onChange={changeNoteValue}
+          onChange={editNoteValue}
           onBlur={confirmNoteValue}
         ></textarea>
       </div>
@@ -45,8 +47,8 @@ const TaskDetails = React.memo(() => {
             <path d='M7.406 15.422l-1.406-1.406 6-6 6 6-1.406 1.406-4.594-4.594z'></path>
           </svg>
         </div>
-        <div className='task-details__date'>Создано вт, 21 июля</div>
-        <div className='task-details__delete-task'>
+        <div className='task-details__date'>{date}</div>
+        <div className='task-details__delete-task' onClick={deleteTask}>
           <svg
             className='task-details__delete-icon'
             version='1.1'

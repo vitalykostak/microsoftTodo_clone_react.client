@@ -4,6 +4,7 @@ import {
   SET_CREATING_TASK,
   UNSET_CREATING_TASK,
   SET_NEW_TASK_VALUE,
+  DELETE_ONE_TASK,
   REPLACE_ONE_TASK,
   SET_VISIBLE_TASK_DETAILS,
   UNSET_VISIBLE_TASK_DETAILS,
@@ -24,6 +25,11 @@ export const setOneTask = payload => ({
 
 export const replaceOneTask = payload => ({
   type: REPLACE_ONE_TASK,
+  payload,
+});
+
+export const deleteOneTask = payload => ({
+  type: DELETE_ONE_TASK,
   payload,
 });
 
@@ -69,4 +75,8 @@ export const fetchAddNewTask = newTaskObj => dispatch => {
 
 export const fetchUpdateTask = updateData => dispatch => {
   return taskService.updateTask(dispatch, updateData);
+};
+
+export const fetchDeleteTask = taskId => dispatch => {
+  return taskService.deleteTask(dispatch, taskId);
 };

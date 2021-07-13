@@ -44,6 +44,10 @@ class ListHelper {
     return list.find(currentTask => currentTask._id === taskId);
   }
 
+  deleteOneTask(list, taskId) {
+    return list.filter(task => task._id !== taskId);
+  }
+
   isDefaultList(activeListId) {
     return /^__DEFAULT_LIST_/.test(activeListId);
   }

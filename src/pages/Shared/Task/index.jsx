@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import propTypes from 'prop-types';
 
 import useTask from '../../../hooks/useTask';
 
@@ -10,8 +11,10 @@ import NoteSVG from '../SVG/NoteSVG';
 
 import './Task.scss';
 
-const Task = React.memo(({ displayAdditional, task, type }) => {
+const Task = React.memo(({ isDisplayAdditional, task, type }) => {
   const { toggleComplete, toggleImportant, showTaskDetails } = useTask(task);
+
+  console.log(task.creationDate instanceof Date);
 
   const button = React.useMemo(
     () => (
@@ -53,7 +56,7 @@ const Task = React.memo(({ displayAdditional, task, type }) => {
         >
           {task.text}
         </p>
-        {displayAdditional && task.note.length !== 0 && (
+        {isDisplayAdditional && task.note.length !== 0 && (
           <div className='task__additional-info'>
             <NoteSVG className='task__note-icon' />
             <span className='task__is-note'>Заметка</span>
@@ -64,5 +67,19 @@ const Task = React.memo(({ displayAdditional, task, type }) => {
     </div>
   );
 });
+
+Task.propTypes = {
+  isDisplayAdditional: propTypes.bool,
+  type: propTypes.oneOf(['listItem', 'taskDetails']),
+  task: propTypes.shape({
+    _id: propTypes.string,
+    externalList: propTypes.string,
+    taskOwnerId: propTypes.string,
+    note: propTypes.string,
+    text: propTypes.string,
+    isImportant: propTypes.bool,
+    isDone: propTypes.bool,
+  }),
+};
 
 export default Task;

@@ -3,6 +3,7 @@ import {
   SET_TASKS,
   SET_ONE_TASK,
   REPLACE_ONE_TASK,
+  DELETE_ONE_TASK,
   SET_CREATING_TASK,
   UNSET_CREATING_TASK,
   SET_NEW_TASK_VALUE,
@@ -35,8 +36,14 @@ const tasksReducer = (state = initialState, action) => {
       };
     }
 
+    case DELETE_ONE_TASK: {
+      return {
+        ...state,
+        allTasks: [...listHelper.deleteOneTask(state.allTasks, action.payload)],
+      };
+    }
+
     case REPLACE_ONE_TASK: {
-      console.log('here');
       return {
         ...state,
         allTasks: [
