@@ -59,7 +59,9 @@ class ListHelper {
   getListLabel(activeListId, defaultLists, customLists) {
     const isDefaultList = this.isDefaultList(activeListId);
     const targetObj = isDefaultList ? defaultLists : customLists;
-    const activeList = targetObj.find(el => el.id === activeListId);
+    console.log(targetObj);
+    const activeList = targetObj.find(el => el._id === activeListId);
+
     return activeList.label;
   }
 

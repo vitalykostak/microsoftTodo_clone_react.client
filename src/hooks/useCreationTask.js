@@ -53,12 +53,13 @@ const useCreationTask = () => {
   );
 
   const newTaskObj = useMemo(() => {
+    console.log(activeListId);
     if (newTaskValue.trim().length === 0) return null;
 
     if (!listHelper.isDefaultList(activeListId)) {
       return {
         text: newTaskValue.trim(),
-        listId: activeListId,
+        externalList: activeListId,
         isImportant: false,
       };
     }

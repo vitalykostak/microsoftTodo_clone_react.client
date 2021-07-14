@@ -1,54 +1,24 @@
 import React from 'react';
-import ListSVG from '../../../Shared/SVG/ListSVG';
+import { useSelector } from 'react-redux';
+import List from './List';
 
-function CustomLists() {
-  return (
-    <div className='user-lists'>
-      {/* <div className='user-lists__list user-lists__list--active'>
-          <ListSVG classList='user-lists__list-icon' />
-          <span className='user-lists__list-label'>Список без названия 1</span>
-          <span className='user-lists__task-count'>1</span>
-        </div> */}
-      {/* <div className='user-lists__list user-lists__list--active'>
-          <ListSVG classList='user-lists__list-icon' />
-          <span className='user-lists__list-label'>Список без названия</span>
-          <span className='user-lists__task-count'>1</span>
-        </div>
-       
-        <div className='user-lists__list'>
-          <ListSVG classList='user-lists__list-icon' />
-          <span className='user-lists__list-label'>Список без названия 1</span>
-          <span className='user-lists__task-count'>1</span>
-        </div>
+const CustomLists = React.memo(() => {
+  const { customLists, activeListId } = useSelector(state => ({
+    customLists: state.lists.customLists,
+    activeListId: state.lists.activeListId,
+  }));
 
-        <div className='user-lists__project'>
-          <div className='user-lists__project-title'>
-            <ProjectSVG classList='user-lists__project-icon' />
-            <p className='user-lists__project-label'>Проэкт 1</p>
-            <ArrowSVG classList='user-lists__project-arrow user-lists__project-arrow--close' />
-          </div>
-          <div className='user-lists__list user-lists__project-list'>
-            <ListSVG classList='user-lists__list-icon' />
-            <span className='user-lists__list-label'>
-              Список без названия 2
-            </span>
-            <span className='user-lists__task-count'>1</span>
-          </div>
-          <div className='user-lists__list user-lists__project-list user-lists__project-list--active'>
-            <ListSVG classList='user-lists__list-icon' />
-            <span className='user-lists__list-label'>
-              Список без названия 2
-            </span>
-            <span className='user-lists__task-count'>1</span>
-          </div>
-        </div>
-        <div className='user-lists__list user-lists__list--active'>
-          <ListSVG classList='user-lists__list-icon' />
-          <span className='user-lists__list-label'>Список без названия 1</span>
-          <span className='user-lists__task-count'>1</span>
-        </div> */}
-    </div>
-  );
-}
+  const lists = customLists.map(list => (
+    <List
+      key={list._id}
+      listId={list._id}
+      isActiveList={activeListId === list._id}
+    >
+      {list.label}
+    </List>
+  ));
+
+  return <div className='user-lists'>{lists}</div>;
+});
 
 export default CustomLists;

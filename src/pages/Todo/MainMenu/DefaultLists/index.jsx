@@ -7,7 +7,7 @@ function DefaultLists() {
   const defaultLists = useSelector(state => state.lists.defaultLists);
 
   const defaultListElems = defaultLists.map(el => (
-    <DefaultList key={el.id} id={el.id}>
+    <DefaultList key={el._id} id={el._id}>
       {el.label}
     </DefaultList>
   ));

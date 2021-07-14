@@ -1,8 +1,10 @@
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import listHelper from '../helpers/list-helper';
 
-const useTaskList = listIs => {
+const useTaskList = () => {
+  const [listTasks, setListTasks] = useState([]);
+
   const { activeListId, allTasks, customLists, defaultLists } = useSelector(
     state => ({
       activeListId: state.lists.activeListId,
@@ -12,11 +14,15 @@ const useTaskList = listIs => {
     })
   );
 
-  const listTasks = listHelper.getTasksByListId(allTasks, activeListId);
+  // const listTasks = listHelper.getTasksByListId(allTasks, activeListId);
 
-  const uncompletedTasks = useMemo(() => {
-    return listHelper.calculateUncompletedTasks(listTasks);
-  }, [allTasks]);
+  // const uncompletedTasks = useMemo(() => {
+  //   return listHelper.calculateUncompletedTasks(listTasks);
+  // }, [allTasks]);
+
+  useEffect(() => {
+    setListTasks(listHelper.getTasksByListId(allTasks, activeListId));
+  }, [allTasks, activeListId]);
 
   const listLabel = listHelper.getListLabel(
     activeListId,
@@ -24,7 +30,7 @@ const useTaskList = listIs => {
     customLists
   );
 
-  return { activeListId, listTasks, uncompletedTasks, listLabel };
+  return { activeListId, listTasks, listLabel };
 };
 
 export default useTaskList;
