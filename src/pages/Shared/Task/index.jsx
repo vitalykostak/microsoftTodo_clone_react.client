@@ -12,9 +12,16 @@ import NoteSVG from '../SVG/NoteSVG';
 import './Task.scss';
 
 const Task = React.memo(({ isDisplayAdditional, task, type }) => {
-  const { toggleComplete, toggleImportant, showTaskDetails } = useTask(task);
-
-  console.log(task.creationDate instanceof Date);
+  const {
+    changeRenameingValue,
+    toggleComplete,
+    toggleImportant,
+    showTaskDetails,
+    isRenameingTask,
+    renameingValue,
+    confirmRenameTask,
+    renameTask,
+  } = useTask(task);
 
   const button = React.useMemo(
     () => (
@@ -28,6 +35,26 @@ const Task = React.memo(({ isDisplayAdditional, task, type }) => {
     ),
     [task.isImportant]
   );
+
+  const textBlock =
+    type === 'taskDetails' && isRenameingTask ? (
+      <textarea
+        className='task__task-essence task__task-essence--edit-field'
+        value={renameingValue}
+        onChange={changeRenameingValue}
+        onBlur={confirmRenameTask}
+      ></textarea>
+    ) : (
+      <p
+        onClick={renameTask}
+        className={classNames('task__task-essence', {
+          'task__task-essence--completed': task.isDone,
+          'task__task-essence--editable': type === 'taskDetails',
+        })}
+      >
+        {task.text}
+      </p>
+    );
 
   return (
     // <div className='task list__task' onClick={showTaskDetails}>
@@ -49,13 +76,7 @@ const Task = React.memo(({ isDisplayAdditional, task, type }) => {
         <label className='task__checkbox-label' htmlFor={task._id}></label>
       </div>
       <div className='task__wrapper-task-essence'>
-        <p
-          className={classNames('task__task-essence', {
-            'task__task-essence--completed': task.isDone,
-          })}
-        >
-          {task.text}
-        </p>
+        {textBlock}
         {isDisplayAdditional && task.note.length !== 0 && (
           <div className='task__additional-info'>
             <NoteSVG className='task__note-icon' />

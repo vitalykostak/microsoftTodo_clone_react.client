@@ -15,7 +15,6 @@ import useRequest from './useRequest';
 const useTaskDetails = () => {
   const dispatch = useDispatch();
   const [isHiddingTaskDetails, setIsHiddingTaskDetails] = useState(false);
-  const [isRenameingTask, setIsRenameingTask] = useState(false);
   const [newNoteValue, setNewNoteValue] = useState('');
 
   const { activeTaskId, allTasks } = useSelector(state => ({
@@ -71,12 +70,12 @@ const useTaskDetails = () => {
   }, [activeTask]);
 
   return {
-    activeTask,
-    newNoteValue,
-    editNoteValue,
+    isHiddingTaskDetails,
     confirmNoteValue,
     hideTaskDetails,
-    isHiddingTaskDetails,
+    editNoteValue,
+    newNoteValue,
+    activeTask,
     deleteTask,
     date,
   };

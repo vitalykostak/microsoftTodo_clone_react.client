@@ -60,14 +60,23 @@
 
   &__task-essence {
     padding-left: 1.5rem;
-
     font-size: 1.3rem;
+    color: $contrastColor;
     font-weight: 400;
     letter-spacing: 0.02em;
 
     &--completed {
       color: $accompanyingСolor;
       text-decoration: line-through;
+    }
+
+    &--edit-field {
+      background-color: $bgColor;
+      padding-top: 1rem;
+    }
+
+    &--editable {
+      cursor: text;
     }
   }
 

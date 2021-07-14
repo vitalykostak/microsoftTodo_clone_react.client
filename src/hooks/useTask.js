@@ -1,8 +1,7 @@
-import { useCallback } from 'react';
+import { useCallback, useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import useRequest from './useRequest';
 
-import taskHelper from '../helpers/task-helper';
 import {
   fetchUpdateTask,
   setVisibeTaskDetails,
@@ -12,10 +11,45 @@ import {
 const useTask = task => {
   const dispatch = useDispatch();
 
+  const [isRenameingTask, setIsRenameingTask] = useState(false);
+  const [renameingValue, setRenameingValue] = useState('');
+
   const { isDisplayTaskDetails, activeTask } = useSelector(state => ({
     isDisplayTaskDetails: state.tasks.isDisplayTaskDetails,
     activeTask: state.tasks.activeTask,
   }));
+
+  useEffect(() => {
+    setRenameingValue(task.text);
+    setIsRenameingTask(false);
+  }, [task]);
+
+  const renameTask = () => {
+    setIsRenameingTask(true);
+  };
+
+  const changeRenameingValue = e => {
+    setRenameingValue(e.target.value);
+  };
+
+  const confirmRenameTaskReq = useRequest(
+    fetchUpdateTask({ taskId: task._id, updateData: { text: renameingValue } })
+  );
+
+  const confirmRenameTask = () => {
+    try {
+      if (renameingValue === task.text) {
+        return;
+      }
+      if (renameingValue.trim().length === 0) {
+        setRenameingValue(task.text);
+        return;
+      }
+      confirmRenameTaskReq();
+    } finally {
+      setIsRenameingTask(false);
+    }
+  };
 
   const isDone = task.isDone;
   const isImportant = task.isImportant;
@@ -50,7 +84,17 @@ const useTask = task => {
     }
   }, [isDisplayTaskDetails, activeTask]);
 
-  return { toggleComplete, toggleImportant, showTaskDetails };
+  return {
+    changeRenameingValue,
+    toggleComplete,
+    toggleImportant,
+    showTaskDetails,
+
+    isRenameingTask,
+    renameingValue,
+    confirmRenameTask,
+    renameTask,
+  };
 };
 
 export default useTask;

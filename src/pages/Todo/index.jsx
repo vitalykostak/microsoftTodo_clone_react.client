@@ -14,7 +14,6 @@ import TaskList from './TaskList';
 import './App.scss';
 
 const Todo = React.memo(() => {
-  console.log('sdfsdfsdf');
   const { user, tasks, lists, isDisplayTaskDetails } = useSelector(state => ({
     user: state.user,
     tasks: state.tasks,
