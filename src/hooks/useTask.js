@@ -33,17 +33,19 @@ const useTask = task => {
   };
 
   const confirmRenameTaskReq = useRequest(
-    fetchUpdateTask({ taskId: task._id, updateData: { text: renameingValue } })
+    fetchUpdateTask({
+      taskId: task._id,
+      updateData: { text: renameingValue.trim() },
+    })
   );
 
   const confirmRenameTask = () => {
     try {
-      if (renameingValue === task.text) {
-        return;
+      if (renameingValue.trim() === task.text) {
+        return setRenameingValue(task.text);
       }
       if (renameingValue.trim().length === 0) {
-        setRenameingValue(task.text);
-        return;
+        return setRenameingValue(task.text);
       }
       confirmRenameTaskReq();
     } finally {

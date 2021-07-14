@@ -9,7 +9,6 @@ class DateUtil {
 
   static getDayName(moment) {
     const dayNames = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
-    console.log(moment.getDay());
     return dayNames[moment.getDay()];
   }
 
@@ -25,8 +24,8 @@ class DateUtil {
       'авг.',
       'сен.',
       'окт.',
-      'ноя',
-      'дек',
+      'ноя.',
+      'дек.',
     ];
     return `${monthNames[moment.getMonth()]}`;
   }

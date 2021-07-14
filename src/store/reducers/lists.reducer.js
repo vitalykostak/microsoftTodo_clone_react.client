@@ -1,4 +1,4 @@
-import { SET_LISTS, SET_ACTIVE_LIST } from '../actionTypes';
+import { SET_LISTS, SET_ONE_LIST, SET_ACTIVE_LIST } from '../actionTypes';
 
 const initialState = {
   defaultLists: [
@@ -17,6 +17,13 @@ const listsReducer = (state = initialState, action) => {
         customLists: [...action.payload],
       };
     }
+    case SET_ONE_LIST: {
+      return {
+        ...state,
+        customLists: [...state.customLists, action.payload],
+      };
+    }
+
     case SET_ACTIVE_LIST: {
       return {
         ...state,

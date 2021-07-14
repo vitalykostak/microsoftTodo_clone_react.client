@@ -3,10 +3,14 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setActiveList } from '../../../store/actionCreators/lists';
-import listHelper from '../../../helpers/list-helper';
-import FilledStarSVG from '../../Shared/SVG/FilledStarSVG';
-import TasksListSVG from '../../Shared/SVG/TasksListSVG';
+import { setActiveList } from '../../../../store/actionCreators/lists';
+import {
+  unsetActiveTask,
+  unsetVisibeTaskDetails,
+} from '../../../../store/actionCreators/tasks';
+import listHelper from '../../../../helpers/list-helper';
+import FilledStarSVG from '../../../Shared/SVG/FilledStarSVG';
+import TasksListSVG from '../../../Shared/SVG/TasksListSVG';
 
 const DefaultList = React.memo(({ id, children }) => {
   const dispatch = useDispatch();
@@ -39,6 +43,8 @@ const DefaultList = React.memo(({ id, children }) => {
   const onClick = React.useCallback(() => {
     if (activeListId === id) return false;
     dispatch(setActiveList(id));
+    dispatch(unsetActiveTask());
+    dispatch(unsetVisibeTaskDetails());
   }, [activeListId, dispatch, id]);
 
   return (

@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import useTaskDetails from '../../../hooks/useTaskDetails';
 
 import Task from '../../Shared/Task';
+import ArrowSVG from '../../Shared/SVG/ArrowSVG';
+// import Task from '../../Shared/Task';
 
 import './TaskDetails.scss';
 
@@ -37,15 +39,7 @@ const TaskDetails = React.memo(() => {
       </div>
       <footer className='task-details__management'>
         <div className='task-details__disable' onClick={hideTaskDetails}>
-          <svg
-            className='task-details__disable-arrow'
-            version='1.1'
-            xmlns='http://www.w3.org/2000/svg'
-            viewBox='0 0 24 24'
-          >
-            <title>Закрыть подробное представление</title>
-            <path d='M7.406 15.422l-1.406-1.406 6-6 6 6-1.406 1.406-4.594-4.594z'></path>
-          </svg>
+          <ArrowSVG className='task-details__disable-arrow' />
         </div>
         <div className='task-details__date'>{date}</div>
         <div className='task-details__delete-task' onClick={deleteTask}>

@@ -51,4 +51,5 @@ export const UNSET_ACTIVE_TASK = 'UNSET_ACTIVE_TASK';
 
 // lists-reducer
 export const SET_LISTS = 'SET_LISTS';
+export const SET_ONE_LIST = 'SET_ONE_LIST';
 export const SET_ACTIVE_LIST = 'SET_ACTIVE_LIST';
