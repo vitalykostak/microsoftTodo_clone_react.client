@@ -48,6 +48,14 @@ class ListHelper {
     return list.filter(task => task._id !== taskId);
   }
 
+  deleteTasksByListId(list, listId) {
+    return list.filter(task => task.externalList !== listId);
+  }
+
+  deleteOneList(listArr, listId) {
+    return listArr.filter(list => list._id !== listId);
+  }
+
   isDefaultList(activeListId) {
     return /^__DEFAULT_LIST_/.test(activeListId);
   }

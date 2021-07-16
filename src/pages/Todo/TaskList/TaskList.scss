@@ -37,7 +37,7 @@
     flex-direction: column;
     justify-content: center;
   }
-  &__to-menu {
+  &__to-menu-btn {
     display: none;
     // background-color: red;
     width: 4rem;
@@ -67,9 +67,15 @@
     background-color: $lessSaturatedThemeColor;
   }
 
-  &__list-label {
+  &__label-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 3rem;
+  }
+  &__list-label {
     padding: 0.5rem;
+    flex-grow: 1;
 
     font-size: 1.8rem;
     color: $accentColor;
@@ -92,6 +98,25 @@
       background-color: $lessSaturatedThemeColor;
       font-weight: 300;
     }
+  }
+
+  &__delete-btn {
+    display: flex;
+    justify-content: end;
+    padding: 1rem;
+    border-radius: 0.5rem;
+
+    &:hover,
+    &:active {
+      background-color: $lessSaturatedThemeColor;
+      .list__delete-icon {
+        fill: $dangerColor;
+      }
+    }
+  }
+  &__delete-icon {
+    width: 2.5rem;
+    fill: $accompanyingСolor;
   }
 
   &__tasks {

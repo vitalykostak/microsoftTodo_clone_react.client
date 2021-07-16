@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CloudError({ ...atrs }) {
+function CloudErrorSVG({ ...atrs }) {
   return (
     <svg
       version='1.1'
@@ -13,4 +13,4 @@ function CloudError({ ...atrs }) {
   );
 }
 
-export default CloudError;
+export default CloudErrorSVG;

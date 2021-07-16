@@ -4,7 +4,10 @@ import { useSelector } from 'react-redux';
 import useRequest from './useRequest';
 
 import listHelper from '../helpers/list-helper';
-import { fetchUpdateList } from '../store/actionCreators/lists';
+import {
+  fetchUpdateList,
+  fetchDeleteList,
+} from '../store/actionCreators/lists';
 
 const useTaskList = listId => {
   // TODO change state on Ref
@@ -58,6 +61,10 @@ const useTaskList = listId => {
     }
   }, [newListLabelVal, listLabel]);
 
+  const deleteListReq = useRequest(fetchDeleteList(listId));
+
+  const deleteList = () => deleteListReq();
+
   return {
     listTasks,
     listLabel,
@@ -67,6 +74,7 @@ const useTaskList = listId => {
     changeNewListVal,
     newListLabelVal,
     confirmRenameListLabel,
+    deleteList,
   };
 };
 

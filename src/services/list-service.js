@@ -2,8 +2,12 @@ import api from '../api';
 import {
   setLists,
   setOneList,
+  deleteOneList,
   replaceOneList,
+  setActiveList,
 } from '../store/actionCreators/lists';
+
+import { deleteTasksByListId } from '../store/actionCreators/tasks';
 
 class ListService {
   async getLists(dispatch) {
@@ -35,6 +39,17 @@ class ListService {
         }
       }
     );
+  }
+
+  async delete(dispatch, listId) {
+    return await api('/list', 'DELETE', { listId }).then(response => {
+      const { statusCode } = response;
+      if (statusCode === 204) {
+        dispatch(deleteOneList(listId));
+        dispatch(deleteTasksByListId(listId));
+        return dispatch(setActiveList('__DEFAULT_LIST_TASKS__'));
+      }
+    });
   }
 }
 

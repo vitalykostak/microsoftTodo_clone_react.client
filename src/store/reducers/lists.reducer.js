@@ -1,6 +1,7 @@
 import {
   SET_LISTS,
   SET_ONE_LIST,
+  DELETE_ONE_LIST,
   SET_ACTIVE_LIST,
   REPLACE_ONE_LIST,
 } from '../actionTypes';
@@ -24,10 +25,20 @@ const listsReducer = (state = initialState, action) => {
         customLists: [...action.payload],
       };
     }
+
     case SET_ONE_LIST: {
       return {
         ...state,
         customLists: [...state.customLists, action.payload],
+      };
+    }
+
+    case DELETE_ONE_LIST: {
+      return {
+        ...state,
+        customLists: [
+          ...listHelper.deleteOneList(state.customLists, action.payload),
+        ],
       };
     }
 

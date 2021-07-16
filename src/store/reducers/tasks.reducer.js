@@ -4,6 +4,7 @@ import {
   SET_ONE_TASK,
   REPLACE_ONE_TASK,
   DELETE_ONE_TASK,
+  DELETE_TASKS_BY_LIST_ID,
   SET_VISIBLE_TASK_DETAILS,
   UNSET_VISIBLE_TASK_DETAILS,
   SET_ACTIVE_TASK,
@@ -36,6 +37,15 @@ const tasksReducer = (state = initialState, action) => {
       return {
         ...state,
         allTasks: [...listHelper.deleteOneTask(state.allTasks, action.payload)],
+      };
+    }
+
+    case DELETE_TASKS_BY_LIST_ID: {
+      return {
+        ...state,
+        allTasks: [
+          ...listHelper.deleteTasksByListId(state.allTasks, action.payload),
+        ],
       };
     }
 

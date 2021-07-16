@@ -8,6 +8,7 @@ import CreationTask from './CreationTask';
 import Task from '../../Shared/Task';
 
 import ArrowSVG from '../../Shared/SVG/ArrowSVG';
+import DeleteSVG from '../../Shared/SVG/DeleteSVG';
 
 import './TaskList.scss';
 
@@ -21,6 +22,7 @@ const TaskList = React.memo(({ listId }) => {
     changeNewListVal,
     newListLabelVal,
     confirmRenameListLabel,
+    deleteList,
   } = useTaskList(listId);
 
   const labelElem = isEditable ? (
@@ -46,10 +48,17 @@ const TaskList = React.memo(({ listId }) => {
   return (
     <article className='list'>
       <header className='list__header'>
-        <div className='list__to-menu'>
+        <div className='list__to-menu-btn'>
           <ArrowSVG className='list__to-menu-icon' />
         </div>
-        {labelElem}
+        <div className='list__label-wrapper'>
+          {labelElem}
+          {!isDefaultList && (
+            <div className='list__delete-btn' onClick={deleteList}>
+              <DeleteSVG className='list__delete-icon' />
+            </div>
+          )}
+        </div>
       </header>
       <div className='list__tasks'>
         {listTasks.map(task => (

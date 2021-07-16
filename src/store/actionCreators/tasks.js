@@ -2,6 +2,7 @@ import {
   SET_TASKS,
   SET_ONE_TASK,
   DELETE_ONE_TASK,
+  DELETE_TASKS_BY_LIST_ID,
   REPLACE_ONE_TASK,
   SET_VISIBLE_TASK_DETAILS,
   UNSET_VISIBLE_TASK_DETAILS,
@@ -27,6 +28,11 @@ export const replaceOneTask = payload => ({
 
 export const deleteOneTask = payload => ({
   type: DELETE_ONE_TASK,
+  payload,
+});
+
+export const deleteTasksByListId = payload => ({
+  type: DELETE_TASKS_BY_LIST_ID,
   payload,
 });
 
