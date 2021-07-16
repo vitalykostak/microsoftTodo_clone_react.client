@@ -25,8 +25,6 @@ class TaskService {
       const { statusCode, json } = response;
       if (statusCode === 201) {
         dispatch(setOneTask(json));
-        dispatch(unsetCreatingTask());
-        dispatch(setNewTaskValue(''));
       }
     });
   }

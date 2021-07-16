@@ -1,5 +1,9 @@
 import api from '../api';
-import { setLists, setOneList } from '../store/actionCreators/lists';
+import {
+  setLists,
+  setOneList,
+  replaceOneList,
+} from '../store/actionCreators/lists';
 
 class ListService {
   async getLists(dispatch) {
@@ -8,7 +12,6 @@ class ListService {
       if (statusCode === 404) {
         return dispatch(setLists([]));
       } else if (statusCode === 200) {
-        // return console.log(json);
         return dispatch(setLists(json));
       }
     });
@@ -18,10 +21,20 @@ class ListService {
     return await api('/list', 'POST', { label }).then(response => {
       const { statusCode, json } = response;
       if (statusCode === 201) {
-        // return console.log(json);
         return dispatch(setOneList(json));
       }
     });
+  }
+
+  async update(dispatch, { listId, updateData }) {
+    return await api('/list', 'PATCH', { listId, updateData }).then(
+      response => {
+        const { statusCode, json } = response;
+        if (statusCode === 200) {
+          return dispatch(replaceOneList(json));
+        }
+      }
+    );
   }
 }
 

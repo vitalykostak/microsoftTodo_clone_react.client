@@ -1,4 +1,11 @@
-import { SET_LISTS, SET_ONE_LIST, SET_ACTIVE_LIST } from '../actionTypes';
+import {
+  SET_LISTS,
+  SET_ONE_LIST,
+  SET_ACTIVE_LIST,
+  REPLACE_ONE_LIST,
+} from '../actionTypes';
+
+import listHelper from '../../helpers/list-helper';
 
 const initialState = {
   defaultLists: [
@@ -21,6 +28,16 @@ const listsReducer = (state = initialState, action) => {
       return {
         ...state,
         customLists: [...state.customLists, action.payload],
+      };
+    }
+
+    case REPLACE_ONE_LIST: {
+      return {
+        ...state,
+        customLists: listHelper.findAndReplace(
+          [...state.customLists],
+          action.payload
+        ),
       };
     }
 

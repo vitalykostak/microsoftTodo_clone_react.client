@@ -1,83 +1,75 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useCallback, useEffect, useRef, useMemo } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import useRequest from './useRequest';
 
 import {
-  setCreatingTask,
-  unsetCreatingTask,
-  setNewTaskValue,
+  // setCreatingTask,
+  // unsetCreatingTask,
+  // setNewTaskValue,
   fetchAddNewTask,
 } from '../store/actionCreators/tasks';
 import listHelper from '../helpers/list-helper';
 
 const useCreationTask = () => {
-  const dispatch = useDispatch();
+  const [isCreatingTask, setIsCreatingTask] = useState(false);
+  const [newTaskValue, setNewTaskValue] = useState('');
+
   const inputRef = useRef();
+  const newTaskObj = useRef(null);
 
-  const {
-    activeListId,
-    customLists,
-    defaultLists,
-    isCreatingTask,
-    newTaskValue,
-  } = useSelector(state => ({
+  const { activeListId } = useSelector(state => ({
     activeListId: state.lists.activeListId,
-    customLists: state.lists.customLists,
-    defaultLists: state.lists.defaultLists,
-    isCreatingTask: state.tasks.creatingTask.isCreatingTask,
-    newTaskValue: state.tasks.creatingTask.value,
   }));
-
-  const currentListLabel = listHelper.getListLabel(
-    activeListId,
-    defaultLists,
-    customLists
-  );
 
   const enableCreationTask = useCallback(() => {
     if (isCreatingTask) return false;
-    dispatch(setCreatingTask());
-  }, [isCreatingTask, dispatch]);
+    setIsCreatingTask(true);
+  }, [isCreatingTask]);
 
   const disableCreationTask = useCallback(() => {
     if (!isCreatingTask) return false;
-    dispatch(unsetCreatingTask());
-  }, [isCreatingTask, dispatch]);
+    setIsCreatingTask(false);
+  }, [isCreatingTask]);
 
-  const changeNewTaskValue = useCallback(
-    e => {
-      dispatch(setNewTaskValue(e.target.value));
-    },
-    [dispatch]
-  );
+  const changeNewTaskValue = useCallback(e => {
+    setNewTaskValue(e.target.value);
+  }, []);
 
-  const newTaskObj = useMemo(() => {
-    console.log(activeListId);
-    if (newTaskValue.trim().length === 0) return null;
+  useEffect(() => {
+    if (newTaskValue.trim().length === 0) {
+      return (newTaskObj.current = null);
+    }
 
     if (!listHelper.isDefaultList(activeListId)) {
-      return {
+      return (newTaskObj.current = {
         text: newTaskValue.trim(),
         externalList: activeListId,
         isImportant: false,
-      };
+      });
     }
 
     if (listHelper.isDefaultImportantList(activeListId)) {
-      return {
+      return (newTaskObj.current = {
         text: newTaskValue.trim(),
         isImportant: true,
-      };
+      });
     }
 
-    return {
+    return (newTaskObj.current = {
       text: newTaskValue.trim(),
       isImportant: false,
-    };
+    });
   }, [activeListId, newTaskValue]);
 
-  const addNewTaskRequest = useRequest(fetchAddNewTask(newTaskObj));
+  const addNewTaskReq = useRequest(fetchAddNewTask(newTaskObj.current));
+  const addNewTask = useCallback(() => {
+    if (!newTaskObj.current) {
+      return false;
+    }
+    addNewTaskReq();
+    setNewTaskValue('');
+  }, [newTaskObj.current]);
 
   useEffect(() => {
     if (isCreatingTask) {
@@ -87,17 +79,16 @@ const useCreationTask = () => {
 
   // Reset newTaskValue when changing acticeList
   useEffect(() => {
-    dispatch(setNewTaskValue(''));
-  }, [activeListId, dispatch]);
+    setNewTaskValue('');
+  }, [activeListId]);
 
   return {
     activeListId,
     isCreatingTask,
-    currentListLabel,
     enableCreationTask,
     disableCreationTask,
     changeNewTaskValue,
-    addNewTaskRequest,
+    addNewTask,
     newTaskValue,
     newTaskObj,
     inputRef,

@@ -46,7 +46,7 @@ const Todo = React.memo(() => {
   return (
     <main className='app'>
       <MainMenu />
-      <TaskList />
+      <TaskList listId={lists.activeListId} />
       {isDisplayTaskDetails && <TaskDetails />}
     </main>
   );

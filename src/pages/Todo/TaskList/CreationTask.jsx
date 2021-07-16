@@ -9,20 +9,14 @@ import Button from '../../Shared/Button';
 const CreationTask = React.memo(() => {
   const {
     isCreatingTask,
-    currentListLabel,
     enableCreationTask,
     disableCreationTask,
     changeNewTaskValue,
-    addNewTaskRequest,
+    addNewTask,
     newTaskValue,
     newTaskObj,
     inputRef,
   } = useCreationTask();
-
-  const addNewTask = () => {
-    if (!newTaskObj) return false;
-    addNewTaskRequest();
-  };
 
   const icon = React.useMemo(() => {
     return newTaskObj || isCreatingTask ? (
@@ -47,7 +41,6 @@ const CreationTask = React.memo(() => {
         value={newTaskValue}
         type='text'
         placeholder='Добавить задачу'
-        title={`Добавить задачу в "${currentListLabel}"`}
         ref={inputRef}
       />
     </footer>

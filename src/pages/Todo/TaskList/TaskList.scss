@@ -1,0 +1,142 @@
+@import '../../../Variables.scss';
+@mixin padding-left-list {
+  padding-left: 1.5rem;
+}
+@mixin padding-left-project {
+  padding-left: 3.5rem;
+}
+
+.list {
+  @media (max-width: 1250px) {
+    flex-shrink: 0;
+    width: 60%;
+    padding: 2rem;
+  }
+  @media (max-width: 992px) {
+    width: 50%;
+  }
+  @media (max-width: 500px) {
+    width: 100%;
+  }
+
+  position: relative;
+  overflow-y: auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  flex-grow: 1;
+  max-height: 100%;
+  padding: 3rem;
+
+  background-color: $bgColor;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  &__to-menu {
+    display: none;
+    // background-color: red;
+    width: 4rem;
+    height: 4rem;
+    &:active {
+      background-color: $lessSaturatedThemeColor;
+    }
+
+    @media (max-width: 500px) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+  }
+  &__to-menu-icon {
+    fill: $accompanyingСolor;
+    transform: rotate(-90deg);
+  }
+
+  &__tasks {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  &__task {
+    margin-bottom: 0.2rem;
+    background-color: $lessSaturatedThemeColor;
+  }
+
+  &__list-label {
+    margin-bottom: 3rem;
+    padding: 0.5rem;
+
+    font-size: 1.8rem;
+    color: $accentColor;
+    letter-spacing: 0.1rem;
+    border-radius: 0.5rem;
+    &:hover {
+      cursor: default;
+    }
+
+    &--edit-possible {
+      &:hover,
+      &:active {
+        background-color: $lessSaturatedThemeColor;
+        cursor: text;
+      }
+    }
+
+    &--input {
+      color: $accompanyingСolor;
+      background-color: $lessSaturatedThemeColor;
+      font-weight: 300;
+    }
+  }
+
+  &__tasks {
+    flex-grow: 1;
+  }
+
+  &__new-task {
+    height: 5rem;
+  }
+}
+
+.new-task {
+  display: flex;
+
+  margin-top: 1rem;
+  border-radius: 0.5rem;
+  background-color: $lessSaturatedThemeColor;
+
+  &__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+    width: 5rem;
+
+    &-plus {
+      fill: $accompanyingСolor;
+
+      width: 3rem;
+    }
+    &-circle {
+      fill: $accompanyingСolor;
+
+      width: 2.6rem;
+    }
+  }
+
+  &__input {
+    flex-grow: 1;
+    height: 100%;
+
+    padding: 0.5rem;
+
+    font-size: 1.5rem;
+    color: $contrastColor;
+  }
+}

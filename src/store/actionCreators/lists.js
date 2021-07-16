@@ -1,4 +1,9 @@
-import { SET_LISTS, SET_ONE_LIST, SET_ACTIVE_LIST } from '../actionTypes';
+import {
+  SET_LISTS,
+  SET_ONE_LIST,
+  SET_ACTIVE_LIST,
+  REPLACE_ONE_LIST,
+} from '../actionTypes';
 import listService from '../../services/list-service';
 
 export const setLists = payload => ({
@@ -8,6 +13,11 @@ export const setLists = payload => ({
 
 export const setOneList = payload => ({
   type: SET_ONE_LIST,
+  payload,
+});
+
+export const replaceOneList = payload => ({
+  type: REPLACE_ONE_LIST,
   payload,
 });
 
@@ -24,4 +34,8 @@ export const fetchAllLists = () => dispatch => {
 
 export const fetchCreateList = label => dispatch => {
   return listService.create(dispatch, label);
+};
+
+export const fetchUpdateList = updateData => dispatch => {
+  return listService.update(dispatch, updateData);
 };

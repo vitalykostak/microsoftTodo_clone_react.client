@@ -3,6 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import listHelper from '../helpers/list-helper';
 import { setActiveList } from '../store/actionCreators/lists';
+import {
+  unsetActiveTask,
+  unsetVisibeTaskDetails,
+} from '../store/actionCreators/tasks';
 
 const useList = listId => {
   const [uncompletedTasks, setUncompletedTasks] = useState(0);
@@ -16,6 +20,8 @@ const useList = listId => {
   }, [allTasks]);
 
   const activeList = useCallback(() => {
+    dispatch(unsetActiveTask());
+    dispatch(unsetVisibeTaskDetails());
     dispatch(setActiveList(listId));
   }, [dispatch]);
 

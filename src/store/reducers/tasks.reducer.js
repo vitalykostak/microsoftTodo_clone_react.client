@@ -4,9 +4,6 @@ import {
   SET_ONE_TASK,
   REPLACE_ONE_TASK,
   DELETE_ONE_TASK,
-  SET_CREATING_TASK,
-  UNSET_CREATING_TASK,
-  SET_NEW_TASK_VALUE,
   SET_VISIBLE_TASK_DETAILS,
   UNSET_VISIBLE_TASK_DETAILS,
   SET_ACTIVE_TASK,
@@ -15,7 +12,6 @@ import {
 
 const initialState = {
   allTasks: null,
-  creatingTask: { isCreatingTask: false, value: '' },
   isDisplayTaskDetails: false,
   activeTask: null,
 };
@@ -49,36 +45,6 @@ const tasksReducer = (state = initialState, action) => {
         allTasks: [
           ...listHelper.findAndReplace(state.allTasks, action.payload),
         ],
-      };
-    }
-
-    case SET_CREATING_TASK: {
-      return {
-        ...state,
-        creatingTask: {
-          ...state.creatingTask,
-          isCreatingTask: true,
-        },
-      };
-    }
-
-    case UNSET_CREATING_TASK: {
-      return {
-        ...state,
-        creatingTask: {
-          ...state.creatingTask,
-          isCreatingTask: false,
-        },
-      };
-    }
-
-    case SET_NEW_TASK_VALUE: {
-      return {
-        ...state,
-        creatingTask: {
-          ...state.creatingTask,
-          value: action.payload,
-        },
       };
     }
 

@@ -91,7 +91,6 @@ const useTask = task => {
     toggleComplete,
     toggleImportant,
     showTaskDetails,
-
     isRenameingTask,
     renameingValue,
     confirmRenameTask,

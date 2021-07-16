@@ -1,9 +1,6 @@
 import {
   SET_TASKS,
   SET_ONE_TASK,
-  SET_CREATING_TASK,
-  UNSET_CREATING_TASK,
-  SET_NEW_TASK_VALUE,
   DELETE_ONE_TASK,
   REPLACE_ONE_TASK,
   SET_VISIBLE_TASK_DETAILS,
@@ -30,19 +27,6 @@ export const replaceOneTask = payload => ({
 
 export const deleteOneTask = payload => ({
   type: DELETE_ONE_TASK,
-  payload,
-});
-
-export const setCreatingTask = () => ({
-  type: SET_CREATING_TASK,
-});
-
-export const unsetCreatingTask = () => ({
-  type: UNSET_CREATING_TASK,
-});
-
-export const setNewTaskValue = payload => ({
-  type: SET_NEW_TASK_VALUE,
   payload,
 });
 

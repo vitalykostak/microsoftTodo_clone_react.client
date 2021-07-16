@@ -1,4 +1,7 @@
 import React from 'react';
+import propTypes from 'prop-types';
+import classNames from 'classnames';
+
 import useTaskList from '../../../hooks/useTaskList';
 
 import CreationTask from './CreationTask';
@@ -6,9 +9,39 @@ import Task from '../../Shared/Task';
 
 import ArrowSVG from '../../Shared/SVG/ArrowSVG';
 
-const TaskList = React.memo(() => {
-  const { listTasks, listLabel } = useTaskList();
-  console.log(listTasks);
+import './TaskList.scss';
+
+const TaskList = React.memo(({ listId }) => {
+  const {
+    listTasks,
+    listLabel,
+    isDefaultList,
+    isEditable,
+    editListLabel,
+    changeNewListVal,
+    newListLabelVal,
+    confirmRenameListLabel,
+  } = useTaskList(listId);
+
+  const labelElem = isEditable ? (
+    <input
+      className='list__list-label list__list-label--input'
+      type='text'
+      value={newListLabelVal}
+      onChange={changeNewListVal}
+      onBlur={confirmRenameListLabel}
+      autoFocus
+    />
+  ) : (
+    <h1
+      className={classNames('list__list-label', {
+        'list__list-label--edit-possible': !isDefaultList,
+      })}
+      onClick={!isDefaultList ? editListLabel : undefined}
+    >
+      {listLabel}
+    </h1>
+  );
 
   return (
     <article className='list'>
@@ -16,7 +49,7 @@ const TaskList = React.memo(() => {
         <div className='list__to-menu'>
           <ArrowSVG className='list__to-menu-icon' />
         </div>
-        <h1 className='list__list-label'>{listLabel}</h1>
+        {labelElem}
       </header>
       <div className='list__tasks'>
         {listTasks.map(task => (
@@ -32,5 +65,9 @@ const TaskList = React.memo(() => {
     </article>
   );
 });
+
+TaskList.propTypes = {
+  listId: propTypes.string.isRequired,
+};
 
 export default TaskList;
