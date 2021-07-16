@@ -3,6 +3,8 @@ import {
   UNSET_ACTIVE_DROPDOWN,
   SET_HIDDING_DROPDOWN,
   UNSET_HIDDING_DROPDOWN,
+  UNSET_VISIBLE_MAIN_MENU,
+  SET_VISIBLE_MAIN_MENU,
 } from '../actionTypes';
 
 const initialState = {
@@ -10,6 +12,7 @@ const initialState = {
     isActive: false,
     isHidding: false,
   },
+  mainMenuVisible: true,
 };
 
 function mainMenuReducer(state = initialState, action) {
@@ -48,6 +51,20 @@ function mainMenuReducer(state = initialState, action) {
           ...state.profileDropDown,
           isHidding: false,
         },
+      };
+    }
+
+    case SET_VISIBLE_MAIN_MENU: {
+      return {
+        ...state,
+        mainMenuVisible: true,
+      };
+    }
+
+    case UNSET_VISIBLE_MAIN_MENU: {
+      return {
+        ...state,
+        mainMenuVisible: false,
       };
     }
     default: {

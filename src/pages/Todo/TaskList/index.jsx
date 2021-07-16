@@ -23,6 +23,7 @@ const TaskList = React.memo(({ listId }) => {
     newListLabelVal,
     confirmRenameListLabel,
     deleteList,
+    showMainMenu,
   } = useTaskList(listId);
 
   const labelElem = isEditable ? (
@@ -48,7 +49,7 @@ const TaskList = React.memo(({ listId }) => {
   return (
     <article className='list'>
       <header className='list__header'>
-        <div className='list__to-menu-btn'>
+        <div className='list__to-menu-btn' onClick={showMainMenu}>
           <ArrowSVG className='list__to-menu-icon' />
         </div>
         <div className='list__label-wrapper'>

@@ -13,7 +13,7 @@ const List = React.memo(({ children, listId, isActiveList }) => {
         'user-lists__list--active': isActiveList,
       })}
       onClick={() => {
-        if (!isActiveList) activeList();
+        activeList();
       }}
     >
       <ListSVG className='user-lists__list-icon' />

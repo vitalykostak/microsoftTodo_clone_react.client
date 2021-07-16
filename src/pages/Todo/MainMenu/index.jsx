@@ -1,5 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import classNames from 'classnames';
+import propTypes from 'prop-types';
 
 import Profile from './Profile';
 import DefaultLists from './DefaultLists';
@@ -8,9 +9,13 @@ import ListCreation from './ListCreation';
 
 import './MainMenu.scss';
 
-const MainMenu = React.memo(() => {
+const MainMenu = React.memo(({ mainMenuVisible }) => {
   return (
-    <nav className='main-menu main-menu--non-priority-display'>
+    <nav
+      className={classNames('main-menu', {
+        'main-menu--non-priority-display': !mainMenuVisible,
+      })}
+    >
       <h3 className='main-menu__app-name container-menu'>To Do</h3>
       <Profile />
       <DefaultLists />
@@ -19,5 +24,9 @@ const MainMenu = React.memo(() => {
     </nav>
   );
 });
+
+MainMenu.propTypes = {
+  mainMenuVisible: propTypes.bool.isRequired,
+};
 
 export default MainMenu;

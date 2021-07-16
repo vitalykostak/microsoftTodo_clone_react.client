@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import useRequest from './useRequest';
 
@@ -9,7 +9,11 @@ import {
   fetchDeleteList,
 } from '../store/actionCreators/lists';
 
+import { setVisibleMainMenu } from '../store/actionCreators/mainMenu';
+
 const useTaskList = listId => {
+  const dispatch = useDispatch();
+
   // TODO change state on Ref
   const [listLabel, setListLabel] = useState(null);
   const [newListLabelVal, setNewListLabelVal] = useState(null);
@@ -65,6 +69,8 @@ const useTaskList = listId => {
 
   const deleteList = () => deleteListReq();
 
+  const showMainMenu = useCallback(() => dispatch(setVisibleMainMenu()), []);
+
   return {
     listTasks,
     listLabel,
@@ -75,6 +81,7 @@ const useTaskList = listId => {
     newListLabelVal,
     confirmRenameListLabel,
     deleteList,
+    showMainMenu,
   };
 };
 

@@ -7,6 +7,7 @@ import {
   unsetActiveTask,
   unsetVisibeTaskDetails,
 } from '../store/actionCreators/tasks';
+import { unsetVisibleMainMenu } from '../store/actionCreators/mainMenu';
 
 const useList = listId => {
   const [uncompletedTasks, setUncompletedTasks] = useState(0);
@@ -23,6 +24,7 @@ const useList = listId => {
     dispatch(unsetActiveTask());
     dispatch(unsetVisibeTaskDetails());
     dispatch(setActiveList(listId));
+    dispatch(unsetVisibleMainMenu());
   }, [dispatch]);
 
   return { uncompletedTasks, activeList };

@@ -1,32 +1,16 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
+import useList from '../../../../hooks/useList';
 
-import { setActiveList } from '../../../../store/actionCreators/lists';
-import {
-  unsetActiveTask,
-  unsetVisibeTaskDetails,
-} from '../../../../store/actionCreators/tasks';
-import listHelper from '../../../../helpers/list-helper';
 import FilledStarSVG from '../../../Shared/SVG/FilledStarSVG';
 import TasksListSVG from '../../../Shared/SVG/TasksListSVG';
 
-const DefaultList = React.memo(({ id, children }) => {
-  const dispatch = useDispatch();
-  const { allTasks, activeListId } = useSelector(state => ({
-    allTasks: state.tasks.allTasks,
-    activeListId: state.lists.activeListId,
-  }));
-
-  const uncompletedTasks = React.useMemo(() => {
-    const tasks = listHelper.getTasksByListId(allTasks, id);
-    const completedTasks = listHelper.sortCompletedTask(tasks);
-    return tasks.length - completedTasks.length;
-  }, [allTasks]);
+const DefaultList = React.memo(({ listId, children, isActiveList }) => {
+  const { uncompletedTasks, activeList } = useList(listId);
 
   const icon = React.useMemo(() => {
-    switch (id) {
+    switch (listId) {
       case '__DEFAULT_LIST_TASKS__': {
         return (
           <TasksListSVG className='tasks-essence__icon tasks-essence__icon-tasks' />
@@ -38,26 +22,20 @@ const DefaultList = React.memo(({ id, children }) => {
         );
       }
     }
-  }, [id]);
-
-  const onClick = React.useCallback(() => {
-    if (activeListId === id) return false;
-    dispatch(setActiveList(id));
-    dispatch(unsetActiveTask());
-    dispatch(unsetVisibeTaskDetails());
-  }, [activeListId, dispatch, id]);
+  }, [listId]);
 
   return (
     <div
-      onClick={onClick}
+      onClick={activeList}
       className={classNames('tasks-essence__essence-item', {
-        'tasks-essence__essence-item--active': activeListId === id,
+        'tasks-essence__essence-item--active': isActiveList,
       })}
     >
       <div
         className={classNames('tasks-essence__item', {
-          'tasks-essence__item--tasks': id === '__DEFAULT_LIST_TASKS__',
-          'tasks-essence__item--important': id === '__DEFAULT_LIST_IMPORTANT__',
+          'tasks-essence__item--tasks': listId === '__DEFAULT_LIST_TASKS__',
+          'tasks-essence__item--important':
+            listId === '__DEFAULT_LIST_IMPORTANT__',
         })}
       >
         {icon}
@@ -69,8 +47,9 @@ const DefaultList = React.memo(({ id, children }) => {
 });
 
 DefaultList.propTypes = {
-  id: PropTypes.string.isRequired,
+  listId: PropTypes.string.isRequired,
   children: PropTypes.string.isRequired,
+  isActiveList: PropTypes.bool.isRequired,
 };
 
 export default DefaultList;

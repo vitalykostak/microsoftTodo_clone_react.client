@@ -14,12 +14,14 @@ import TaskList from './TaskList';
 import './App.scss';
 
 const Todo = React.memo(() => {
-  const { user, tasks, lists, isDisplayTaskDetails } = useSelector(state => ({
-    user: state.user,
-    tasks: state.tasks,
-    isDisplayTaskDetails: state.tasks.isDisplayTaskDetails,
-    lists: state.lists,
-  }));
+  const { user, tasks, lists, isDisplayTaskDetails, mainMenuVisible } =
+    useSelector(state => ({
+      user: state.user,
+      tasks: state.tasks,
+      isDisplayTaskDetails: state.tasks.isDisplayTaskDetails,
+      lists: state.lists,
+      mainMenuVisible: state.mainMenu.mainMenuVisible,
+    }));
 
   const getUserInfo = useRequest(fetchUserInfo());
   const getAllTasks = useRequest(fetchAllTasks());
@@ -45,7 +47,7 @@ const Todo = React.memo(() => {
 
   return (
     <main className='app'>
-      <MainMenu />
+      <MainMenu mainMenuVisible={mainMenuVisible} />
       <TaskList listId={lists.activeListId} />
       {isDisplayTaskDetails && <TaskDetails />}
     </main>
