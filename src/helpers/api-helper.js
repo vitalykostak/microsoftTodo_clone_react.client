@@ -1,4 +1,5 @@
 import ServerError from '../exceptions/server-exception';
+import AuthError from '../exceptions/authentication-exception';
 
 class ApiHelper {
   hasBody(response) {
@@ -26,6 +27,12 @@ class ApiHelper {
         normalisedResponse.json.message,
         normalisedResponse.statusCode
       );
+    }
+  }
+
+  checkAuthError(normalisedResponse) {
+    if (normalisedResponse.statusCode === 401) {
+      throw new AuthError(normalisedResponse.json.message);
     }
   }
 }

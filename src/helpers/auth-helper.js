@@ -1,8 +1,3 @@
-// import {
-//   changeUsernameHTTPError,
-//   changPasswordHTTPError,
-// } from '../store/actionCreators/actions';
-
 class AuthHelper {
   validateFirstname(value) {
     if (value.length === 0) {

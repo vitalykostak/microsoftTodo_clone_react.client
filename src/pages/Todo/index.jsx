@@ -28,9 +28,11 @@ const Todo = React.memo(() => {
   const getAllLists = useRequest(fetchAllLists());
 
   React.useEffect(() => {
-    getUserInfo();
-    getAllTasks();
-    getAllLists();
+    (async () => {
+      await getUserInfo();
+      getAllTasks();
+      getAllLists();
+    })();
   }, []);
 
   const isReadyInitialData = !!(

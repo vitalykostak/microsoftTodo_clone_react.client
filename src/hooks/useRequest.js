@@ -7,6 +7,10 @@ import {
   setNetworkError,
   setServerError,
 } from '../store/actionCreators/app';
+
+import AuthHelper from '../helpers/auth-helper';
+
+import AuthError from '../exceptions/authentication-exception';
 import NetworkError from '../exceptions/network-exception';
 import ServerError from '../exceptions/server-exception';
 
@@ -18,7 +22,10 @@ const useRequest = func => {
       dispatch(setFetching());
       await func(dispatch);
     } catch (e) {
-      if (e instanceof NetworkError) {
+      if (e instanceof AuthError) {
+        AuthHelper.deleteToken();
+        return window.location.reload();
+      } else if (e instanceof NetworkError) {
         return dispatch(setNetworkError(e.message));
       } else if (e instanceof ServerError) {
         return dispatch(setServerError(`Status ${e.statusCode}: ${e.message}`));

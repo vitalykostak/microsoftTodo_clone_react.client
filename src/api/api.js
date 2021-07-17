@@ -1,3 +1,4 @@
+import AuthError from '../exceptions/authentication-exception';
 import NetworkError from '../exceptions/network-exception';
 import ServerError from '../exceptions/server-exception';
 import ApiHelper from '../helpers/api-helper';
@@ -19,11 +20,13 @@ async function api(url, method, body = null, headers = {}) {
     const response = await fetch(URL, fetchOption);
     const normalisedResponse = await ApiHelper.normaliseResponse(response);
     ApiHelper.checkServerError(normalisedResponse);
+    ApiHelper.checkAuthError(normalisedResponse);
     return normalisedResponse;
   } catch (e) {
-    if (e instanceof ServerError) {
+    if (e instanceof ServerError || e instanceof AuthError) {
       throw e;
     }
+    console.log(e);
     throw new NetworkError('Ошибка связи');
   }
 }

@@ -70,10 +70,21 @@ class AuthService {
     });
   }
 
-  async logout(dispatch) {
+  async logout() {
     return await api('/auth/logout', 'DELETE').finally(() => {
       authHelper.deleteToken();
       window.location.reload();
+    });
+  }
+
+  async refresh() {
+    return await api('/auth/refresh', 'GET').then(response => {
+      if (response.statusCode === 200) {
+        authHelper.deleteToken();
+        authHelper.setAuthDataToLS({
+          token: response.json.accesToken,
+        });
+      }
     });
   }
 }
