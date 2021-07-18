@@ -8,6 +8,7 @@ import Button from '../Button';
 import FilledStarSVG from '../SVG/FilledStarSVG';
 import NotFilledStarSVG from '../SVG/NotFilledStarSVG';
 import NoteSVG from '../SVG/NoteSVG';
+import CheckArrowSVG from '../SVG/CheckArrowSVG';
 
 import './Task.scss';
 
@@ -57,7 +58,6 @@ const Task = React.memo(({ isDisplayAdditional, task, type }) => {
     );
 
   return (
-    // <div className='task list__task' onClick={showTaskDetails}>
     <div
       className={classNames('task', {
         list__task: type === 'listItem',
@@ -65,7 +65,7 @@ const Task = React.memo(({ isDisplayAdditional, task, type }) => {
       })}
       onClick={showTaskDetails}
     >
-      <div onClick={toggleComplete}>
+      <div className='task__checkbox-wrapper' onClick={toggleComplete}>
         <input
           className='task__checkbox'
           type='checkbox'
@@ -73,7 +73,11 @@ const Task = React.memo(({ isDisplayAdditional, task, type }) => {
           checked={task.isDone}
           readOnly
         />
-        <label className='task__checkbox-label' htmlFor={task._id}></label>
+        <label className='task__checkbox-label' htmlFor={task._id}>
+          {task.isDone && (
+            <CheckArrowSVG className='task__checkbox-checkmark' />
+          )}
+        </label>
       </div>
       <div className='task__wrapper-task-essence'>
         {textBlock}

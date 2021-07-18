@@ -9,8 +9,9 @@
   align-items: center;
   height: 0%;
   width: 100%;
+  z-index: 1000;
 
-  background-color: $lessSaturatedThemeColor;
+  background-color: $themeColor;
   opacity: 0;
   animation: open 200ms forwards;
 

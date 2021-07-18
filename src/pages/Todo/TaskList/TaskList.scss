@@ -39,9 +39,8 @@
   }
   &__to-menu-btn {
     display: none;
-    // background-color: red;
-    width: 4rem;
-    height: 4rem;
+    width: 3.5rem;
+    height: 3.5rem;
     &:active {
       background-color: $lessSaturatedThemeColor;
     }

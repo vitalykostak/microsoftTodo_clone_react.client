@@ -7,6 +7,7 @@ import { fetchUserInfo } from '../../store/actionCreators/user';
 import useRequest from '../../hooks/useRequest';
 
 import AppPreloader from '../Shared/AppPreloader';
+import FetchingErrorBanner from '../Shared/FetchingErrorBanner';
 import TaskDetails from './TaskDetails';
 import MainMenu from './MainMenu';
 import TaskList from './TaskList';
@@ -14,8 +15,9 @@ import TaskList from './TaskList';
 import './App.scss';
 
 const Todo = React.memo(() => {
-  const { user, tasks, lists, isDisplayTaskDetails, mainMenuVisible } =
+  const { user, tasks, lists, isDisplayTaskDetails, mainMenuVisible, app } =
     useSelector(state => ({
+      app: state.app,
       user: state.user,
       tasks: state.tasks,
       isDisplayTaskDetails: state.tasks.isDisplayTaskDetails,
@@ -47,8 +49,20 @@ const Todo = React.memo(() => {
     return <AppPreloader />;
   }
 
+  console.log(app);
+
   return (
     <main className='app'>
+      {app.networkError && (
+        <FetchingErrorBanner type={'networkError'}>
+          {app.networkError}
+        </FetchingErrorBanner>
+      )}
+      {app.serverError && (
+        <FetchingErrorBanner type={'serverError'}>
+          {app.serverError}
+        </FetchingErrorBanner>
+      )}
       <MainMenu mainMenuVisible={mainMenuVisible} />
       <TaskList listId={lists.activeListId} />
       {isDisplayTaskDetails && <TaskDetails />}

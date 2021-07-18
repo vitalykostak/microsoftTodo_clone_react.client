@@ -21,8 +21,16 @@
     display: none;
   }
 
+  &__checkbox-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   &__checkbox-label {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-shrink: 0;
     width: 2.5rem;
     height: 2.5rem;
@@ -33,23 +41,15 @@
       cursor: pointer;
     }
   }
+  &__checkbox-checkmark {
+    width: 55%;
+    fill: $themeColor;
+  }
 
   &__checkbox:checked + &__checkbox-label {
     border: none;
     background-color: $accentColor;
-    &:after {
-      // content: url(./assets/icons/checkmark.svg);
-      position: relative;
-      top: 0.6rem;
-      right: 0.3rem;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      width: 1.5rem;
-      height: 1.5rem;
-    }
+    animation: showCheckbox 100ms forwards;
   }
 
   &__wrapper-task-essence {

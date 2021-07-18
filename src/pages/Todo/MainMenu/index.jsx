@@ -16,7 +16,7 @@ const MainMenu = React.memo(({ mainMenuVisible }) => {
         'main-menu--non-priority-display': !mainMenuVisible,
       })}
     >
-      <h3 className='main-menu__app-name container-menu'>To Do</h3>
+      <h3 className='main-menu__app-name container-menu'>ToDo</h3>
       <Profile />
       <DefaultLists />
       <CustomLists />

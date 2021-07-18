@@ -1,0 +1,35 @@
+@import '../../../Variables.scss';
+
+.preloader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  min-height: -webkit-fill-available;
+  min-height: 100vh;
+
+  &__loading-text {
+    font-size: 6rem;
+    color: $accentColor;
+    animation: blink 1200ms infinite;
+  }
+
+  &__error-text {
+    font-size: 4rem;
+    color: $accompanyingСolor;
+  }
+  &__error-icon {
+    width: 6rem;
+    fill: $dangerColor;
+  }
+
+  @keyframes blink {
+    50% {
+      color: $accompanyingСolor;
+    }
+    100% {
+      color: $accentColor;
+    }
+  }
+}
