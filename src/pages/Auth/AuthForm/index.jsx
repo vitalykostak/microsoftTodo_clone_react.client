@@ -41,10 +41,10 @@ const AuthForm = () => {
   const handlersPasswordField = useAuthField('password');
   const register = useRequest(
     fetchRegistration(
-      firstNameField.value,
-      surnameField.value,
-      usernameField.value,
-      passwordField.value
+      handlersFirstNameField.value,
+      handlersSurnameField.value,
+      handlersUsernameField.value,
+      handlersPasswordField.value
     )
   );
 
