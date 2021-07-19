@@ -8,6 +8,10 @@ html {
   @media (max-width: 992px) {
     font-size: 9px;
   }
+
+  @media (max-width: 500px) {
+    font-size: 12px;
+  }
   font-size: 13px;
   scrollbar-color: $accompanyingСolor $themeColor; /* «цвет ползунка» «цвет полосы скроллбара» */
   scrollbar-width: thin; /* толщина */

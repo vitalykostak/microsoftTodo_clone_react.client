@@ -23,6 +23,7 @@
   }
   @media (max-width: 500px) {
     width: 100%;
+    border-left: none;
     animation: task-datails-open-less500 200ms forwards;
   }
 

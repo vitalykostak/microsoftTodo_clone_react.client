@@ -40,7 +40,9 @@ const DefaultList = React.memo(({ listId, children, isActiveList }) => {
       >
         {icon}
         <span className='tasks-essence__essence-label'>{children}</span>
-        <span className='tasks-essence__task-count'>{uncompletedTasks}</span>
+        {uncompletedTasks > 0 && (
+          <span className='tasks-essence__task-count'>{uncompletedTasks}</span>
+        )}
       </div>
     </div>
   );

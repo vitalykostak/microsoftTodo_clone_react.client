@@ -45,7 +45,6 @@ const TaskList = React.memo(({ listId }) => {
       {listLabel}
     </h1>
   );
-
   return (
     <article className='list'>
       <header className='list__header'>

@@ -45,9 +45,9 @@ class ListService {
     return await api('/list', 'DELETE', { listId }).then(response => {
       const { statusCode } = response;
       if (statusCode === 204) {
+        dispatch(setActiveList('__DEFAULT_LIST_TASKS__'));
         dispatch(deleteOneList(listId));
-        dispatch(deleteTasksByListId(listId));
-        return dispatch(setActiveList('__DEFAULT_LIST_TASKS__'));
+        return dispatch(deleteTasksByListId(listId));
       }
     });
   }

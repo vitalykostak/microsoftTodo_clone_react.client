@@ -18,7 +18,9 @@ const List = React.memo(({ children, listId, isActiveList }) => {
     >
       <ListSVG className='user-lists__list-icon' />
       <span className='user-lists__list-label'>{children}</span>
-      <span className='user-lists__task-count'>{uncompletedTasks}</span>
+      {uncompletedTasks > 0 && (
+        <span className='tasks-essence__task-count'>{uncompletedTasks}</span>
+      )}
     </div>
   );
 });
