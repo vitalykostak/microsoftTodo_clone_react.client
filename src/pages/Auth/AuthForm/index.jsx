@@ -3,14 +3,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import {
-  setFirstNameVisit,
-  setFirstNameValue,
-  setSurnameVisit,
-  setSurnameValue,
-  setUsernameVisit,
-  setUsernameValue,
-  setPasswordVisit,
-  setPasswordValue,
   fetchRegistration,
   fetchLogin,
 } from '../../../store/actionCreators/authForm';
@@ -43,27 +35,10 @@ const AuthForm = () => {
     activeAction: state.authForm.activeAction,
     visibleRegisterFields: state.authForm.visibleRegisterFields,
   }));
-
-  const handlersFirstNameField = useAuthField(
-    setFirstNameVisit,
-    setFirstNameValue,
-    { visited: firstNameField.visited, value: firstNameField.value }
-  );
-  const handlersSurnameField = useAuthField(setSurnameVisit, setSurnameValue, {
-    visited: surnameField.visited,
-    value: surnameField.value,
-  });
-  const handlersUsernameField = useAuthField(
-    setUsernameVisit,
-    setUsernameValue,
-    { visited: usernameField.visited, value: usernameField.value }
-  );
-  const handlersPasswordField = useAuthField(
-    setPasswordVisit,
-    setPasswordValue,
-    { visited: passwordField.visited, value: passwordField.value }
-  );
-
+  const handlersFirstNameField = useAuthField('firstName');
+  const handlersSurnameField = useAuthField('surname');
+  const handlersUsernameField = useAuthField('username');
+  const handlersPasswordField = useAuthField('password');
   const register = useRequest(
     fetchRegistration(
       firstNameField.value,
@@ -74,7 +49,7 @@ const AuthForm = () => {
   );
 
   const login = useRequest(
-    fetchLogin(usernameField.value, passwordField.value)
+    fetchLogin(handlersUsernameField.value, handlersPasswordField.value)
   );
 
   const loginRenderIcon = () => <DoorSVG className='auth__button-icon' />;
@@ -107,40 +82,40 @@ const AuthForm = () => {
       {activeAction === 'registration' && (
         <AuthField
           type={'text'}
-          placeholder={'Имя'}
           animation={visibleRegisterFields ? 'show' : 'hide'}
           onFocus={handlersFirstNameField.completeVisit}
           onChange={handlersFirstNameField.handleInput}
           activeAction={activeAction}
           {...firstNameField}
+          {...handlersFirstNameField}
         />
       )}
       {activeAction === 'registration' && (
         <AuthField
           type={'text'}
-          placeholder={'Фамилия'}
           animation={visibleRegisterFields ? 'show' : 'hide'}
           onFocus={handlersSurnameField.completeVisit}
           onChange={handlersSurnameField.handleInput}
           activeAction={activeAction}
           {...surnameField}
+          {...handlersSurnameField}
         />
       )}
       <AuthField
         type={'text'}
-        placeholder={'Имя пользователя'}
         onFocus={handlersUsernameField.completeVisit}
         onChange={handlersUsernameField.handleInput}
         activeAction={activeAction}
         {...usernameField}
+        {...handlersUsernameField}
       />
       <AuthField
         type={'password'}
-        placeholder={'Пароль'}
         onFocus={handlersPasswordField.completeVisit}
         onChange={handlersPasswordField.handleInput}
         activeAction={activeAction}
         {...passwordField}
+        {...handlersPasswordField}
       />
       <div className='auth__wrapper-buttons'>
         {activeAction === 'login' && (

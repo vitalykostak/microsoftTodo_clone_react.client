@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import useRequest from './useRequest';
@@ -69,7 +69,7 @@ const useCreationTask = () => {
     }
     addNewTaskReq();
     setNewTaskValue('');
-  }, [newTaskObj.current]);
+  }, [addNewTaskReq]);
 
   useEffect(() => {
     if (isCreatingTask) {

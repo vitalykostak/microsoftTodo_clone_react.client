@@ -1,12 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Button from '../../Shared/Button';
-
 const AuthButton = React.memo(({ onClick, disabled, icon, children }) => {
   return (
     <div className='auth__wrapper-btn auth-item'>
-      <Button
+      <button
         className='auth__button'
         onClick={e => {
           e.preventDefault();
@@ -16,7 +14,7 @@ const AuthButton = React.memo(({ onClick, disabled, icon, children }) => {
       >
         {icon()}
         {children}
-      </Button>
+      </button>
     </div>
   );
 });

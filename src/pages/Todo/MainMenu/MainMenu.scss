@@ -57,8 +57,8 @@
     padding-top: 0.8rem;
     padding-bottom: 0.8rem;
 
-    &:not(.main-menu__profile--open):hover,
-    &:not(.main-menu__profile--open):active {
+    &:not(.main-menu__profile--open):active,
+    &:not(.main-menu__profile--open):hover {
       cursor: pointer;
       background-color: $lessSaturatedThemeColor;
 

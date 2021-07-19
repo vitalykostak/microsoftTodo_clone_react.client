@@ -38,7 +38,7 @@ const useTaskList = listId => {
       listHelper.getListLabel(listId, defaultLists, customLists)
     );
     setIsEditable(false);
-  }, [listId]);
+  }, [listId, customLists, defaultLists]);
 
   const editListLabel = useCallback(() => setIsEditable(true), []);
 
@@ -69,7 +69,10 @@ const useTaskList = listId => {
 
   const deleteList = () => deleteListReq();
 
-  const showMainMenu = useCallback(() => dispatch(setVisibleMainMenu()), []);
+  const showMainMenu = useCallback(
+    () => dispatch(setVisibleMainMenu()),
+    [dispatch]
+  );
 
   return {
     listTasks,

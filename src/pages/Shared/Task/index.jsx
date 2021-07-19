@@ -4,7 +4,6 @@ import propTypes from 'prop-types';
 
 import useTask from '../../../hooks/useTask';
 
-import Button from '../Button';
 import FilledStarSVG from '../SVG/FilledStarSVG';
 import NotFilledStarSVG from '../SVG/NotFilledStarSVG';
 import NoteSVG from '../SVG/NoteSVG';
@@ -23,19 +22,6 @@ const Task = React.memo(({ isDisplayAdditional, task, type }) => {
     confirmRenameTask,
     renameTask,
   } = useTask(task);
-
-  const button = React.useMemo(
-    () => (
-      <Button className='task__important-button' onClick={toggleImportant}>
-        {task.isImportant ? (
-          <FilledStarSVG className='task__important-icon task__important-icon--true' />
-        ) : (
-          <NotFilledStarSVG className='task__important-icon task__important-icon--false' />
-        )}
-      </Button>
-    ),
-    [task.isImportant]
-  );
 
   const textBlock =
     type === 'taskDetails' && isRenameingTask ? (
@@ -88,7 +74,14 @@ const Task = React.memo(({ isDisplayAdditional, task, type }) => {
           </div>
         )}
       </div>
-      {button}
+
+      <button className='task__important-button' onClick={toggleImportant}>
+        {task.isImportant ? (
+          <FilledStarSVG className='task__important-icon task__important-icon--true' />
+        ) : (
+          <NotFilledStarSVG className='task__important-icon task__important-icon--false' />
+        )}
+      </button>
     </div>
   );
 });

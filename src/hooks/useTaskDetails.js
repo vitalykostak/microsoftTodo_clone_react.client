@@ -16,6 +16,7 @@ const useTaskDetails = () => {
   const dispatch = useDispatch();
   const [isHiddingTaskDetails, setIsHiddingTaskDetails] = useState(false);
   const [newNoteValue, setNewNoteValue] = useState('');
+  const [date, setDate] = useState();
 
   const { activeTaskId, allTasks } = useSelector(state => ({
     activeTaskId: state.tasks.activeTask,
@@ -65,8 +66,8 @@ const useTaskDetails = () => {
     deleteTaskReq();
   };
 
-  const date = useMemo(() => {
-    return taskHelper.getHumanReadableDate(activeTask);
+  useEffect(() => {
+    setDate(taskHelper.getHumanReadableDate(activeTask));
   }, [activeTask]);
 
   return {

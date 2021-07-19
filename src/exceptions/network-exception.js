@@ -1,7 +1,3 @@
-class NetworkError extends Error {
-  constructor(message) {
-    super(message);
-  }
-}
+class NetworkError extends Error {}
 
 export default NetworkError;

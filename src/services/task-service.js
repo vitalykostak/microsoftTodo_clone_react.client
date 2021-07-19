@@ -4,8 +4,6 @@ import {
   setOneTask,
   deleteOneTask,
   replaceOneTask,
-  unsetCreatingTask,
-  setNewTaskValue,
 } from '../store/actionCreators/tasks';
 
 class TaskService {

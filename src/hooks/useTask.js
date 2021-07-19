@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect, useRef } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import useRequest from './useRequest';
 
@@ -84,7 +84,7 @@ const useTask = task => {
     if (activeTask !== task._id) {
       dispatch(setActiveTask(task._id));
     }
-  }, [isDisplayTaskDetails, activeTask]);
+  }, [isDisplayTaskDetails, activeTask, dispatch, task._id]);
 
   return {
     changeRenameingValue,

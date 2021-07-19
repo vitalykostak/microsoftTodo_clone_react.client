@@ -4,7 +4,6 @@ import useCreationTask from '../../../hooks/useCreationTask';
 
 import CircleSVG from '../../Shared/SVG/CircleSVG';
 import PlusSVG from '../../Shared/SVG/PlusSVG';
-import Button from '../../Shared/Button';
 
 const CreationTask = React.memo(() => {
   const {
@@ -18,21 +17,17 @@ const CreationTask = React.memo(() => {
     inputRef,
   } = useCreationTask();
 
-  const icon = React.useMemo(() => {
-    return newTaskObj || isCreatingTask ? (
-      <Button className='new-task__icon' onClick={addNewTask}>
-        <CircleSVG className='new-task__icon-circle' />
-      </Button>
-    ) : (
-      <Button className='new-task__icon' onClick={enableCreationTask}>
-        <PlusSVG className='new-task__icon-plus' />
-      </Button>
-    );
-  }, [newTaskObj, isCreatingTask]);
-
   return (
     <footer className='new-task list__new-task'>
-      {icon}
+      {newTaskObj || isCreatingTask ? (
+        <button className='new-task__icon' onClick={addNewTask}>
+          <CircleSVG className='new-task__icon-circle' />
+        </button>
+      ) : (
+        <button className='new-task__icon' onClick={enableCreationTask}>
+          <PlusSVG className='new-task__icon-plus' />
+        </button>
+      )}
       <input
         className='new-task__input'
         onChange={changeNewTaskValue}

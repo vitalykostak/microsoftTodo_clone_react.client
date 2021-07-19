@@ -1,5 +1,5 @@
 class AuthHelper {
-  validateFirstname(value) {
+  validateFirstName(value) {
     if (value.length === 0) {
       return 'Введите имя';
     }

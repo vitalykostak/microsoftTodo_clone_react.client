@@ -18,14 +18,14 @@ const useList = listId => {
     const listTasks = listHelper.getTasksByListId(allTasks, listId);
     const uncompletedTasks = listHelper.calculateUncompletedTasks(listTasks);
     setUncompletedTasks(uncompletedTasks);
-  }, [allTasks]);
+  }, [allTasks, listId]);
 
   const activeList = useCallback(() => {
     dispatch(unsetActiveTask());
     dispatch(unsetVisibeTaskDetails());
     dispatch(setActiveList(listId));
     dispatch(unsetVisibleMainMenu());
-  }, [dispatch]);
+  }, [dispatch, listId]);
 
   return { uncompletedTasks, activeList };
 };

@@ -49,8 +49,6 @@ const Todo = React.memo(() => {
     return <AppPreloader />;
   }
 
-  console.log(app);
-
   return (
     <main className='app'>
       {app.networkError && (
