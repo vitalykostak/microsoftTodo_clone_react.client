@@ -16,8 +16,7 @@ async function api(url, method, body = null, headers = {}) {
       fetchOption.body = JSON.stringify(body);
     }
 
-    // const URL = `https://radiant-brook-31860.herokuapp.com/api${url}`;
-    const URL = `http://localhost:5000/api${url}`;
+    const URL = `https://radiant-brook-31860.herokuapp.com/api${url}`;
     const response = await fetch(URL, fetchOption);
     const normalisedResponse = await ApiHelper.normaliseResponse(response);
     ApiHelper.checkServerError(normalisedResponse);

@@ -3,6 +3,10 @@ import AuthError from '../exceptions/authentication-exception';
 
 class ApiHelper {
   hasBody(response) {
+    if (response.status === 204) {
+      return false;
+    }
+
     if (!response.headers.get('Content-Length')) {
       return false;
     }
