@@ -4,8 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  min-height: -webkit-fill-available;
+  height: 100%;
 
   &__form {
     @media (max-width: 1495px) {

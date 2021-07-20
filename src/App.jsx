@@ -5,6 +5,15 @@ import Auth from './pages/Auth';
 import Todo from './pages/Todo';
 
 function App() {
+  const rootElement = document.getElementById('root');
+  window.addEventListener('load', () => {
+    rootElement.style.height = `${window.innerHeight}px`;
+  });
+
+  window.addEventListener('resize', () => {
+    rootElement.style.height = `${window.innerHeight}px`;
+  });
+
   const authentication = useSelector(state => state.authentication);
   if (!authentication) {
     return <Auth />;

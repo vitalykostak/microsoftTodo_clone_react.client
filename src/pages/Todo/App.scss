@@ -8,10 +8,8 @@
 
 .app {
   display: flex;
-  height: 100vh;
-  max-height: 100vh;
-  min-height: 500px;
   min-height: -webkit-fill-available;
+  height: 100%;
 
   overflow-x: hidden;
 }

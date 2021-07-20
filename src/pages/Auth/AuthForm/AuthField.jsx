@@ -16,7 +16,6 @@ const AuthField = React.memo(
     animation,
   }) => {
     const httpErrorByActiveAction = activeAction && httpError[activeAction];
-    console.log(value);
     return (
       <div
         className={classNames(
