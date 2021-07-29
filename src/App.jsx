@@ -7,11 +7,11 @@ import Todo from './pages/Todo';
 function App() {
   const rootElement = document.getElementById('root');
   window.addEventListener('load', () => {
-    rootElement.style.height = `${window.innerHeight}px`;
+    rootElement.style.height = `${Math.floor(window.innerHeight)}px`;
   });
 
   window.addEventListener('resize', () => {
-    rootElement.style.height = `${window.innerHeight}px`;
+    rootElement.style.height = `${Math.floor(window.innerHeight)}px`;
   });
 
   const authentication = useSelector(state => state.authentication);
